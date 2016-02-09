@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "Package: hose\nType: Package\nTitle: Functions to calculate higher-order spectral estimators and\n     their corresponding unbiased estimate of the mean squared error.\nVersion: 0.1.0\nAuthors@R: person(\"David\", \"Gerard\", email = \"dcgerard@uchicago.edu\",\n                  role = c(\"aut\", \"cre\"))\nDescription: More about what it does (maybe more than one line)\nLicense: GPL-3\nLazyData: TRUE\nImports: \n    tensr\nRoxygenNote: 5.0.1\nSuggests: knitr,\n    rmarkdown\nVignetteBuilder: knitr\n",
+    "created" : 1455046921459.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1084367667",
+    "id" : "A82D17A2",
+    "lastKnownWriteTime" : 1454990344,
+    "last_content_update" : 1454990344,
+    "path" : "~/Dropbox/hose/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "dcf"
+}

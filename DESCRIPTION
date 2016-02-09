@@ -1,0 +1,16 @@
+Package: hose
+Type: Package
+Title: Functions to calculate higher-order spectral estimators and
+     their corresponding unbiased estimate of the mean squared error.
+Version: 0.1.0
+Authors@R: person("David", "Gerard", email = "dcgerard@uchicago.edu",
+                  role = c("aut", "cre"))
+Description: More about what it does (maybe more than one line)
+License: GPL-3
+LazyData: TRUE
+Imports: 
+    tensr
+RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

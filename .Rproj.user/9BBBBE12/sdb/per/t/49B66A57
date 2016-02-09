@@ -1,0 +1,17 @@
+{
+    "contents" : "---\ntitle: \"HOSE Examples\"\nauthor: \"David Gerard\"\ndate: \"`r Sys.Date()`\"\noutput: rmarkdown::html_vignette\nvignette: >\n  %\\VignetteIndexEntry{HOSE Examples}\n  %\\VignetteEngine{knitr::rmarkdown}\n  %\\VignetteEncoding{UTF-8}\n---\n\n## Abstract\nThis abstract will run through a couple examples on calculating higher-order spectral estimators\nand using SURE as an estimator selection procedure.\n\n## Examples\nFirst, we'll load the `hose` package and create some simulated data whose mean is actually low multilinear rank.\n```{r}\nlibrary(hose)\n\np <- c(10, 10, 10)\nr <- c(5, 5, 5)\nn <- length(p)\ntau2 <- 1\nfnorm_mean <- sqrt(prod(p)) * sqrt(tau2) ## so on same order as error\n\nU_temp <- tensr::hosvd(array(stats::rnorm(prod(p)), dim = p))$U\nU2_temp <- list()\nS_temp <- tensr::holq(array(stats::rnorm(prod(p)), dim = r), print_diff = FALSE)$Z\nfor(index in 1:n)\n{\n    U2_temp[[index]] <- U_temp[[index]][ , 1:r[index]]\n}\n## Our mean tensor.\nTheta <- tensr::atrans(S_temp, U2_temp)\nTheta <- Theta/ tensr::fnorm(Theta) * fnorm_mean\nhosvd_Theta <- hose::hosvd_full(Theta)\n\n## Our data tensor\nX <- Theta + array(stats::rnorm(n = prod(p),sd = sqrt(tau2)),dim = p)\n```\n\nSome scree plots of the modes don't make it seem low rank.\n```{r}\n## scree plots of the modes. Doesn't look low rank.\nhosvd_x <- hosvd_full(X)\nhosvd_x$D\nfor(index in 1:n)\n{\n    plot(hosvd_x$D[[index]], type = \"h\", ylim = c(0, max(hosvd_x$D[[index]])),\n         xlab = \"Singular Value\", ylab = \"Value\")\n}\n```\n\nFirst we'll look at mode-specific truncation.\n```{r}\n########\n## Truncated HOSVD with SURE\n########\nsure_rank_out <- sure_rank(X,tau2 = tau2)\nsure_rank_out$min_rank ## estimated rank, should be close to 5,5,5\nsure_rank_out$min_sure ## minimum sure value\n\n\n####\n## Plot resulting SUREs and Ranks\n####\nmarg_1 <- sure_rank_out$all_ranks[,2] == sure_rank_out$min_rank[2] & sure_rank_out$all_ranks[,3] == sure_rank_out$min_rank[3]\nplot(sure_rank_out$all_ranks[,1],sure_rank_out$sure,xlab = \"Mode 1 Rank\",ylab = \"SURE\",main = \"Rank vs SURE\")\nlines(sure_rank_out$all_ranks[marg_1,1],sure_rank_out$sure[marg_1],lty = 2,col = 2,lwd = 2)\nlegend(\"top\",\"Other Modes at Min Value\",lty = 2,col = 2,lwd = 2,cex = 0.7)\n\nmarg_2 <- sure_rank_out$all_ranks[,1] == sure_rank_out$min_rank[1] & sure_rank_out$all_ranks[,3] == sure_rank_out$min_rank[3]\nplot(sure_rank_out$all_ranks[,2],sure_rank_out$sure,xlab = \"Mode 2 Rank\",ylab = \"SURE\",main = \"Rank vs SURE\")\nlines(sure_rank_out$all_ranks[marg_2,2],sure_rank_out$sure[marg_2],lty = 2,col = 2,lwd = 2)\nlegend(\"top\",\"Other Modes at Min Value\",lty = 2,col = 2,lwd = 2,cex = 0.7)\n\nmarg_3 <- sure_rank_out$all_ranks[,1] == sure_rank_out$min_rank[1] & sure_rank_out$all_ranks[,2] == sure_rank_out$min_rank[2]\nplot(sure_rank_out$all_ranks[,3],sure_rank_out$sure,xlab = \"Mode 3 Rank\",ylab = \"SURE\",main = \"Rank vs SURE\")\nlines(sure_rank_out$all_ranks[marg_3,3],sure_rank_out$sure[marg_3],lty = 2,col = 2,lwd = 2)\nlegend(\"top\",\"Other Modes at Min Value\",lty = 2,col = 2,lwd = 2,cex = 0.7)\n\n\n```\n\n\n",
+    "created" : 1454990360415.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3621770315",
+    "id" : "49B66A57",
+    "lastKnownWriteTime" : 1454991700,
+    "path" : "~/Dropbox/hose/vignettes/sure_example.Rmd",
+    "project_path" : "vignettes/sure_example.Rmd",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

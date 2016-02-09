@@ -1,0 +1,166 @@
+---
+title: "HOSE Examples"
+author: "David Gerard"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{HOSE Examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Abstract
+This vignette will run through a couple examples on calculating higher-order spectral estimators (HOSE)
+and using SURE as an estimator selection procedure.
+
+## Generate Simulated Data.
+First, we'll load the `hose` package and create some simulated data whose mean is actually low multilinear rank. `X` is a $10 \times 10 \times 10$ tensor that has multilinear rank $5 \times 5 \times 5$. We use the `holq` function from the `tensr` package to simulate a tensor whose first five singular values along each mode are approximately equal.
+```{r}
+library(hose)
+set.seed(247)
+
+p <- c(10, 10, 10)
+r <- c(5, 5, 5)
+n <- length(p)
+tau2 <- 1
+fnorm_mean <- sqrt(prod(p)) * sqrt(tau2) ## so on same order as error
+
+U_temp <- tensr::hosvd(array(stats::rnorm(prod(p)), dim = p))$U
+U2_temp <- list()
+S_temp <- tensr::holq(array(stats::rnorm(prod(p)), dim = r), print_diff = FALSE)$Z
+for(index in 1:n)
+{
+    U2_temp[[index]] <- U_temp[[index]][ , 1:r[index]]
+}
+## Our mean tensor.
+Theta <- tensr::atrans(S_temp, U2_temp)
+Theta <- Theta / tensr::fnorm(Theta) * fnorm_mean
+hosvd_Theta <- hose::hosvd_full(Theta)
+
+## Our data tensor
+X <- Theta + array(stats::rnorm(n = prod(p), sd = sqrt(tau2)), dim = p)
+```
+
+Some scree plots of the three matricizations of the data `X` do not seem to suggest that the mean tensor has low multilinear rank.
+```{r}
+## scree plots of the modes. Doesn't look low rank.
+hosvd_x <- hosvd_full(X)
+par(cex.lab = 0.7, cex.main = 0.7, cex.axis = 0.7, mgp = c(1.2, 0.4, 0),
+    mar = c(2.2, 2, 1.8, 0.5))
+for(index in 1:n)
+{
+    plot(hosvd_x$D[[index]], type = "h", ylim = c(0, max(hosvd_x$D[[index]])),
+         xlab = "Singular Value", ylab = "Value",
+         main = paste0("Scree Plot for Mode ", index))
+}
+```
+
+## The Mode-specific Truncation Estimator.
+
+First we'll look at mode-specific truncation as a multilinear rank selection procedure, running through each possible multilinear rank using the function `sure_rank`.
+```{r, cache = TRUE}
+sure_rank_out <- sure_rank(X, tau2 = tau2)
+```
+
+`sure_rank` returns the multilinear rank that minimizes the SURE and its corresponding SURE value.
+```{r}
+sure_rank_out$min_rank ## Estimated multilinear rank. Should be close to (5, 5, 5).
+sure_rank_out$min_sure ## Corresponding minimum SURE value.
+```
+
+The profiled SURE for each mode demonstrates that $5 \times 5 \times 5$ is indeed the value that minimizes the SURE.
+```{r}
+par(cex.lab = 0.7, cex.main = 0.7, cex.axis = 0.7, mgp = c(1.2, 0.4, 0),
+    mar = c(2.2, 2, 1.8, 0.5), pch = ".")
+marg_1 <- sure_rank_out$all_ranks[,2] == sure_rank_out$min_rank[2] &
+  sure_rank_out$all_ranks[,3] == sure_rank_out$min_rank[3]
+plot(sure_rank_out$all_ranks[,1], sure_rank_out$sure,
+     xlab = "Mode 1 Rank", ylab = "SURE", main = "Mode 1 Rank vs SURE")
+lines(sure_rank_out$all_ranks[marg_1,1], sure_rank_out$sure[marg_1],
+      lty = 2, col = 2, lwd = 2)
+legend("topright", "Other Modes at Min Value", lty = 2, col = 2,
+       lwd = 2, cex = 0.7)
+
+marg_2 <- sure_rank_out$all_ranks[,1] == sure_rank_out$min_rank[1] &
+  sure_rank_out$all_ranks[,3] == sure_rank_out$min_rank[3]
+plot(sure_rank_out$all_ranks[,2], sure_rank_out$sure,
+     xlab = "Mode 2 Rank", ylab = "SURE", main = "Mode 2 Rank vs SURE")
+lines(sure_rank_out$all_ranks[marg_2,2], sure_rank_out$sure[marg_2],
+      lty = 2, col = 2, lwd = 2)
+legend("topright", "Other Modes at Min Value", lty = 2, col = 2,
+       lwd = 2, cex = 0.7)
+
+marg_3 <- sure_rank_out$all_ranks[,1] == sure_rank_out$min_rank[1] &
+  sure_rank_out$all_ranks[,2] == sure_rank_out$min_rank[2]
+plot(sure_rank_out$all_ranks[,3], sure_rank_out$sure,
+     xlab = "Mode 3 Rank", ylab = "SURE", main = "Mode 3 Rank vs SURE")
+lines(sure_rank_out$all_ranks[marg_3,3], sure_rank_out$sure[marg_3],
+      lty = 2, col = 2, lwd = 2)
+legend("topright", "Other Modes at Min Value", lty = 2, col = 2,
+       lwd = 2, cex = 0.7)
+```
+
+## Mode-specific Soft-thresholding Estimator and Competitors.
+We'll switch gears now and fit a mode-specific soft-thresholding estimator. The optimal parameter values for the mode-specific soft-thresholding estimator can be found via `soft_coord`. The final mean estimate is `soft_coord$est`.
+```{r}
+c_obj <- get_c(X)
+lambda_init <- rep(0,n)
+c_init <- 1
+soft_out <- soft_coord(c_obj,lambda_init = lambda_init,c_init = c_init,
+                       use_sure = TRUE, print_iter = FALSE)
+```
+
+We'll compare the scree plots of the mean $\Theta$, the data $X$, and mode-specific soft-thresholding estimator.
+```{r}
+## scree plots of resulting estimator, X, and Theta
+hosvd_soft <- hosvd_full(soft_out$est)
+
+par(cex.lab = 0.7, cex.main = 0.7, cex.axis = 0.7, mgp = c(1.2, 0.4, 0),
+    mar = c(2.2, 2, 1.8, 0.5), pch = ".")
+for(mode_index in 1:n)
+{
+    plot(hosvd_soft$D[[mode_index]], type = "h", xlab = "Singular Value",
+         ylab = "Value", main = paste0("Mode ", mode_index, " Scree Plot"),
+         ylim = c(0, max(c(hosvd_soft$D[[mode_index]],
+                           hosvd_x$D[[mode_index]],
+                           hosvd_Theta$D[[mode_index]]))))
+    lines(1:p[mode_index] + 0.2, hosvd_x$D[[mode_index]], type = "h", lty = 2)
+    lines(1:p[mode_index] + 0.4, hosvd_Theta$D[[mode_index]], type = "h",
+          lty = 3)
+    legend("topright", c("Soft", "X", "Theta"), lty = 1:3, cex = 0.7)
+}
+```
+
+We'll compare our tensor estimator to a couple matrix and vector competitors. We'll look at the soft-thresholding estimator of Candes et al (2013), Stein's estimator (Stein, 1961), and a variant of the estimator of Efron and Morris (1972) that shrinks one mode, but chooses that mode by SURE.
+```{r}
+svd_mode1 <- svd(tensr::mat(X, 1))
+mat_optim <- optim(1, fn = sure_matrix, d = svd_mode1$d,
+                   p_dim = c(p[1], prod(p[-1])), tau2 = 1, method = "Brent",
+                   lower = 0, upper = svd_mode1$d[1])
+mat_est <- array(svd_mode1$u %*%
+                   diag(hose:::pos_part(svd_mode1$d - mat_optim$par)) %*%
+                   t(svd_mode1$v), dim = p)
+
+final_stein <- stein(X,tau2) ## Stein's estimator.
+final_em <- min_ef(X,tau2) ## Min Efron-Morris estimator.
+```
+
+```{r}
+cat(
+    "                   Losses:", "\n",
+    "         Truncated HOSVD:", round(tensr::fnorm(sure_rank_out$est - Theta)), "\n",
+    "Tensor Soft Thresholding:", round(tensr::fnorm(soft_out$est - Theta)), "\n",
+    "Matrix Soft Thresholding:", round(tensr::fnorm(mat_est - Theta)), "\n",
+    "            Efron-Morris:", round(tensr::fnorm(final_em$ef_est - Theta)), "\n",
+    "                   Stein:", round(tensr::fnorm(final_stein$est - Theta)), "\n",
+    "                       X:", round(tensr::fnorm(X - Theta)), "\n\n")
+```
+
+
+Candes, E., Sing-Long, C. A., & Trzasko, J. D. (2013). Unbiased risk estimates for singular value thresholding and spectral estimators. *Signal Processing, IEEE Transactions on*, 61(19), 4643-4657.
+
+Efron, B., & Morris, C. (1972). Empirical Bayes on vector observations: An extension of Stein's method. *Biometrika*, 59(2), 335-347.
+
+Gerard, D., & Hoff, P. (2015). Adaptive Higher-order Spectral Estimators. *arXiv preprint* arXiv:1505.02114.
+
+James, W., & Stein, C. (1961, June). Estimation with quadratic loss. *In Proceedings of the fourth Berkeley symposium on mathematical statistics and probability* (Vol. 1, No. 1961, pp. 361-379).
