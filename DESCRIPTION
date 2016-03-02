@@ -2,7 +2,7 @@ Package: hose
 Type: Package
 Title: Functions to calculate higher-order spectral estimators and
      their corresponding unbiased estimates of the mean squared error
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("David", "Gerard", email = "dcgerard@uchicago.edu",
                   role = c("aut", "cre"))
 Description: Matrix spectral estimators shrink the singular values of a data
@@ -13,8 +13,10 @@ Description: Matrix spectral estimators shrink the singular values of a data
   parameters by minimizing an unbiased estimate of the mean squared error.
 License: GPL-3
 LazyData: TRUE
-Imports:
-    tensr
+Imports: 
+    tensr,
+    RMTstat,
+    softImpute
 RoxygenNote: 5.0.1
 Suggests: knitr,
     rmarkdown
