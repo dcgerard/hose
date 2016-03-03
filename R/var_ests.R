@@ -25,6 +25,8 @@
 #'     variance of the data matrix.
 #'
 #' @author David Gerard
+#' 
+#' @export
 #'
 #' @references Gavish, M., & Donoho,
 #'     D. L. (2014). \href{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6846297&tag=1}{The
@@ -69,6 +71,8 @@ sig_mp <- function(dmed, N, p) {
 #'
 #' @author David Gerard
 #'
+#' @export
+#'
 #' @references Choi, Yunjin, Jonathan Taylor, and Robert
 #'     Tibshirani. \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal components: Estimation of the true rank of a noisy matrix."}
 #'     arXiv preprint arXiv:1410.8260 (2014).
@@ -105,6 +109,8 @@ sig_naive <- function(d, N, p, r) {
 #'   for the lambdas in \code{lambda_grid}.
 #'   
 #' @author David Gerard
+#' 
+#' @export
 #'   
 #' @references Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani. 
 #'   \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal 
@@ -183,6 +189,8 @@ soft_cv <- function(Y, k = 10, lambda_grid = NULL, print_update = FALSE) {
 #'
 #'
 #' @author David Gerard
+#' 
+#' @export
 #'
 #' @references Choi, Yunjin, Jonathan Taylor, and Robert
 #'     Tibshirani. \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal components: Estimation of the true rank of a noisy matrix."}
@@ -245,6 +253,8 @@ sig_soft <- function(Y, c_val = 2/3, k = 10, lambda_grid = NULL, print_update = 
 #'   Theory, IEEE Transactions on, 60(8), 5040-5053.
 #'   
 #' @author David Gerard
+#' 
+#' @export
 #'   
 #' @seealso \code{\link{sig_soft}} for the soft-thresholding procedure,
 #'   \code{\link{sig_mp}} for a procedure based on a specific asymptotic

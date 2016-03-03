@@ -14,16 +14,16 @@ This vignette will run through a couple examples on calculating higher-order spe
 and using SURE as an estimator selection procedure.
 
 ## Generate Simulated Data.
-First, we'll load the `hose` package and create some simulated data whose mean is actually low multilinear rank. `X` is a $10 \times 10 \times 10$ tensor that has multilinear rank $5 \times 5 \times 5$. We use the `holq` function from the `tensr` package to simulate a tensor whose first five singular values along each mode are approximately equal.
+First, we'll load the `hose` package and create some simulated data whose mean is actually low multilinear rank. `X` is a $10 \times 10 \times 10$ tensor that has multilinear rank $2 \times 2 \times 2$. We use the `holq` function from the `tensr` package to simulate a tensor whose first two singular values along each mode are approximately equal.
 ```{r}
 library(hose)
-set.seed(247)
+set.seed(328)
 
 p <- c(10, 10, 10)
-r <- c(5, 5, 5)
+r <- c(2, 2, 2)
 n <- length(p)
 tau2 <- 1
-fnorm_mean <- sqrt(prod(p)) * sqrt(tau2) ## so on same order as error
+fnorm_mean <- sqrt(prod(p)) * sqrt(tau2) / 2 ## so on same order as error
 
 U_temp <- tensr::hosvd(array(stats::rnorm(prod(p)), dim = p))$U
 U2_temp <- list()
@@ -55,20 +55,39 @@ for(index in 1:n)
 }
 ```
 
+## Estimating the Variance.
+All of these SURE-based mean estimators require that the variance be known. Since in most real-world applications, the variance is not known, I've provided a few methods to non-parametrically estimate the variance. These methods are implemented in the function `tensor_var_est`. The procedures available were all designed for matrix-variate data when the mean is low rank, so `tensor_var_est` applies these methods to each matricization of the data tensor and averages the resulting estimators. I'll describe two of these methods now.
+
+The method that seems to work the best in general situations is that of Choi et al (2014). They use a degrees of freedom corrected residual mean-squared error of a soft-thresholding estimator of the mean where the tuning parameter is chosen by a procedure akin to cross-validation. Use the `sig_method = "soft"` option in `tensor_var_est` to use this method. Note that sometimes the `softImpute` function will not converge and return a warning. The main downside to this method is that it can be very slow.
+```{r, warning=FALSE}
+sig_soft_out <- tensor_var_est(X, sig_method = "soft")
+print(sig_soft_out$sig2_est)
+```
+
+A method that works very well when the multilinear rank is very small and works very poorly othwerwise is that of Gavish and Donoho (2014). Their estimator is based on an asymptotic framework where the rank of the mean and the signal to noise ratio remain constant while the size of the matrix increases. Since 2 (the rank) is much less than 10 (the dimension size), this procedure might work here. Use the option `sig_method = "mp"` in `tensor_var_est` to implement this method.
+```{r}
+sig_mp_out <- tensor_var_est(X, sig_method = "mp")
+print(sig_mp_out$sig2_est)
+```
+
+We'll use the estimator from `sig_mp_out` as our variance in what follows.
+```{r}
+tau2_est <- sig_mp_out$sig2_est
+```
+
 ## The Mode-specific Truncation Estimator.
 
 First we'll look at mode-specific truncation as a multilinear rank selection procedure, running through each possible multilinear rank using the function `sure_rank`.
-```{r, cache = TRUE}
-sure_rank_out <- sure_rank(X, tau2 = tau2)
-```
-
-`sure_rank` returns the multilinear rank that minimizes the SURE and its corresponding SURE value.
 ```{r}
-sure_rank_out$min_rank ## Estimated multilinear rank. Should be close to (5, 5, 5).
-sure_rank_out$min_sure ## Corresponding minimum SURE value.
+sure_rank_out <- sure_rank(X, tau2 = tau2_est)
 ```
 
-The profiled SURE for each mode demonstrates that $5 \times 5 \times 5$ is indeed the value that minimizes the SURE.
+`sure_rank` returns the multilinear rank that minimizes the SURE.
+```{r}
+sure_rank_out$min_rank ## Estimated multilinear rank. Should be close to (2, 2, 2).
+```
+
+The profiled SURE for each mode demonstrates that $2 \times 2 \times 2$ is indeed the value that minimizes the SURE.
 ```{r}
 par(cex.lab = 0.7, cex.main = 0.7, cex.axis = 0.7, mgp = c(1.2, 0.4, 0),
     mar = c(2.2, 2, 1.8, 0.5), pch = ".")
@@ -104,10 +123,10 @@ legend("topright", "Other Modes at Min Value", lty = 2, col = 2,
 We'll switch gears now and fit a mode-specific soft-thresholding estimator. The optimal parameter values for the mode-specific soft-thresholding estimator can be found via `soft_coord`. The final mean estimate is `soft_coord$est`.
 ```{r}
 c_obj <- get_c(X)
-lambda_init <- rep(0,n)
+lambda_init <- rep(0, n)
 c_init <- 1
-soft_out <- soft_coord(c_obj,lambda_init = lambda_init,c_init = c_init,
-                       use_sure = TRUE, print_iter = FALSE)
+soft_out <- soft_coord(c_obj, lambda_init = lambda_init, c_init = c_init,
+                       use_sure = TRUE, print_iter = FALSE, tau2 = tau2_est, itermax = 20)
 ```
 
 We'll compare the scree plots of the mean $\Theta$, the data $X$, and mode-specific soft-thresholding estimator.
@@ -135,14 +154,14 @@ We'll compare our tensor estimator to a couple matrix and vector competitors. We
 ```{r}
 svd_mode1 <- svd(tensr::mat(X, 1))
 mat_optim <- optim(1, fn = sure_matrix, d = svd_mode1$d,
-                   p_dim = c(p[1], prod(p[-1])), tau2 = 1, method = "Brent",
+                   p_dim = c(p[1], prod(p[-1])), tau2 = tau2_est, method = "Brent",
                    lower = 0, upper = svd_mode1$d[1])
 mat_est <- array(svd_mode1$u %*%
                    diag(hose:::pos_part(svd_mode1$d - mat_optim$par)) %*%
                    t(svd_mode1$v), dim = p)
 
-final_stein <- stein(X,tau2) ## Stein's estimator.
-final_em <- min_ef(X,tau2) ## Min Efron-Morris estimator.
+final_stein <- stein(X, tau2_est) ## Stein's estimator.
+final_em <- min_ef(X, tau2_est) ## Min Efron-Morris estimator.
 ```
 
 ```{r}
@@ -159,7 +178,11 @@ cat(
 
 Candes, E., Sing-Long, C. A., & Trzasko, J. D. (2013). Unbiased risk estimates for singular value thresholding and spectral estimators. *Signal Processing, IEEE Transactions on*, 61(19), 4643-4657.
 
+Choi, Y., Taylor, J., & Tibshirani, R. (2014). Selecting the number of principal components: Estimation of the true rank of a noisy matrix. *arXiv preprint* arXiv:1410.8260.
+
 Efron, B., & Morris, C. (1972). Empirical Bayes on vector observations: An extension of Stein's method. *Biometrika*, 59(2), 335-347.
+
+Gavish, M., & Donoho, D. L. (2014). The optimal hard threshold for singular values is 4/sqrt(3). *Information Theory, IEEE Transactions on*, 60(8), 5040-5053.
 
 Gerard, D., & Hoff, P. (2015). Adaptive Higher-order Spectral Estimators. *arXiv preprint* arXiv:1505.02114.
 
