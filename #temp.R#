@@ -1,6 +1,0 @@
-n <- 100
-
-Y <- matrix(rnorm(n^2), nrow = n)
-one_vec <- rep(1, length = n)
-
-Y - n * one_vec %*% t(one_vec)
