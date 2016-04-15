@@ -13,11 +13,13 @@ Description: Matrix spectral estimators shrink the singular values of a data
   parameters by minimizing an unbiased estimate of the mean squared error.
 License: GPL-3
 LazyData: TRUE
-Imports: 
+Imports:
     tensr,
     RMTstat,
     softImpute
 RoxygenNote: 5.0.1
+URL: http://github.com/dcgerard/hose
+BugReports: http://github.com/dcgerard/hose/issues
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

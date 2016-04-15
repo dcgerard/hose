@@ -40,6 +40,8 @@ devtools::install_github("dcgerard/hose")
 ```
 
 ## References
-Gerard, D., & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http://arxiv.org/pdf/1505.02114v1.pdf). *arXiv preprint arXiv:1505.02114*.
+**Gerard, D.**, & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http://arxiv.org/pdf/1505.02114v1.pdf). *arXiv preprint arXiv:1505.02114*.
 
 Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle. [A multilinear singular value decomposition](http://epubs.siam.org/doi/abs/10.1137/S0895479896305696) . *SIAM J. Matrix Anal. Appl.*, 21(4):1253–1278 (electronic), 2000. ISSN 0895-4798. doi: 10.1137/S0895479896305696.
+
+Sylvain Sardy. [Smooth blockwise iterative thresholding: a smooth fixed point estimator based on the likelihood’s block gradient](http://dx.doi.org/10.1080/01621459.2012.664527). *J. Amer. Statist. Assoc.*, 107(498):800–813, 2012. ISSN 0162-1459. doi: 10.1080/01621459.2012.664527.
