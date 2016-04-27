@@ -13,10 +13,10 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-
+# HOSE: Higher-Order Spectral Estimators
 [![Build Status](https://travis-ci.org/dcgerard/hose.svg?branch=master)](https://travis-ci.org/dcgerard/hose)
 
-## Summary
+# Summary
 `hose` is a package designed for working with higher-order spectral estimators. These estimators are based on the higher-order singular value decomposition of De Lathauwer et. al. (2000) and are useful when your data exhibit tensor-specific structure, such as having approximately low multilinear rank. This code will allow you to:
 
 * Calculate Stein's unbiased risk estimate (SURE) for all higher-order spectral estimators that are weakly differentiable and satisfy mild integrability conditions.
@@ -33,7 +33,7 @@ Gerard, D., & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http:
 
 A vignette demonstrating the methods available in `hose` may be found [here](http://home.uchicago.edu/~dcgerard/sure_example.html).
 
-## Installation
+# Installation
 To install, run the following code in R:
 
 ```{r, eval = FALSE}
@@ -41,7 +41,7 @@ install.packages(c("tensr", "softImpute", "RMTstat", "devtools"))
 devtools::install_github("dcgerard/hose")
 ```
 
-## References
+# References
 **Gerard, D.**, & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http://arxiv.org/pdf/1505.02114v1.pdf). *arXiv preprint arXiv:1505.02114*.
 
 Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle. [A multilinear singular value decomposition](http://epubs.siam.org/doi/abs/10.1137/S0895479896305696) . *SIAM J. Matrix Anal. Appl.*, 21(4):1253–1278 (electronic), 2000. ISSN 0895-4798. doi: 10.1137/S0895479896305696.

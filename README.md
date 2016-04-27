@@ -1,8 +1,11 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+HOSE: Higher-Order Spectral Estimators
+======================================
+
 [![Build Status](https://travis-ci.org/dcgerard/hose.svg?branch=master)](https://travis-ci.org/dcgerard/hose)
 
 Summary
--------
+=======
 
 `hose` is a package designed for working with higher-order spectral estimators. These estimators are based on the higher-order singular value decomposition of De Lathauwer et. al. (2000) and are useful when your data exhibit tensor-specific structure, such as having approximately low multilinear rank. This code will allow you to:
 
@@ -21,7 +24,7 @@ Gerard, D., & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http:
 A vignette demonstrating the methods available in `hose` may be found [here](http://home.uchicago.edu/~dcgerard/sure_example.html).
 
 Installation
-------------
+============
 
 To install, run the following code in R:
 
@@ -31,7 +34,7 @@ devtools::install_github("dcgerard/hose")
 ```
 
 References
-----------
+==========
 
 **Gerard, D.**, & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http://arxiv.org/pdf/1505.02114v1.pdf). *arXiv preprint arXiv:1505.02114*.
 
