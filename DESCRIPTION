@@ -21,5 +21,6 @@ RoxygenNote: 5.0.1
 URL: http://github.com/dcgerard/hose
 BugReports: http://github.com/dcgerard/hose/issues
 Suggests: knitr,
-    rmarkdown
+    rmarkdown,
+    covr
 VignetteBuilder: knitr
