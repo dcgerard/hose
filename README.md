@@ -2,7 +2,7 @@
 HOSE: Higher-Order Spectral Estimators
 ======================================
 
-[![Build Status](https://travis-ci.org/dcgerard/hose.svg?branch=master)](https://travis-ci.org/dcgerard/hose)
+[![Build Status](https://travis-ci.org/dcgerard/hose.svg?branch=master)](https://travis-ci.org/dcgerard/hose) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dcgerard/hose?branch=master&svg=true)](https://ci.appveyor.com/project/dcgerard/hose)
 
 Summary
 =======
@@ -29,7 +29,7 @@ Installation
 To install, run the following code in R:
 
 ``` r
-install.packages(c("tensr", "softImpute", "RMTstat", "devtools")) 
+install.packages(c("tensr", "softImpute", "RMTstat", "devtools"))
 devtools::install_github("dcgerard/hose")
 ```
 
