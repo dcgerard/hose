@@ -2,7 +2,7 @@
 HOSE: Higher-Order Spectral Estimators
 ======================================
 
-[![Build Status](https://travis-ci.org/dcgerard/hose.svg?branch=master)](https://travis-ci.org/dcgerard/hose) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dcgerard/hose?branch=master&svg=true)](https://ci.appveyor.com/project/dcgerard/hose)
+[![Build Status](https://travis-ci.org/dcgerard/hose.svg?branch=master)](https://travis-ci.org/dcgerard/hose) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dcgerard/hose?branch=master&svg=true)](https://ci.appveyor.com/project/dcgerard/hose) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 Summary
 =======
