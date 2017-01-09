@@ -29,11 +29,23 @@ knitr::opts_chunk$set(
 * Calculate the SURE for estimators that individually shrink elements of the core array of the HOSVD of the data tensor.
 * Non-parametrically estimate the variance to use in these SURE procedures.
 
-All details of these methods may be found in
+# Citation
+
+If you find these methods useful, please cite
 
 Gerard, D., & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http://arxiv.org/pdf/1505.02114v1.pdf). *arXiv preprint arXiv:1505.02114*.
 
-A vignette demonstrating the methods available in `hose` may be found [here](http://home.uchicago.edu/~dcgerard/sure_example.html).
+Or, using BibTex:
+
+``` tex
+@article{gerard2015adaptive,
+  title={Adaptive Higher-order Spectral Estimators},
+  author={Gerard, David and Hoff, Peter},
+  journal={arXiv preprint arXiv:1505.02114},
+  url={http://arxiv.org/abs/1505.02114},
+  year={2015}
+}
+```
 
 # Installation
 To install, run the following code in R:
@@ -41,6 +53,22 @@ To install, run the following code in R:
 ```{r, eval = FALSE}
 install.packages(c("tensr", "softImpute", "RMTstat", "devtools"))
 devtools::install_github("dcgerard/hose")
+```
+
+# Vignette
+
+I've provided a vignette demonstrating the methods available in `hose`. You can find it [here](http://dcgerard.github.io/code/sure_example.html). Or, if you can build the vignette on
+install with
+
+```{r, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("dcgerard/hose", build_vignettes = TRUE)
+```
+
+and access the vignette by running the following code in R:
+
+```{r, eval = FALSE}
+utils::vignette("sure_example", package = "hose")
 ```
 
 # References
