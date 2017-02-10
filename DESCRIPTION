@@ -16,7 +16,8 @@ LazyData: TRUE
 Imports:
     tensr,
     RMTstat,
-    softImpute
+    softImpute,
+    assertthat
 RoxygenNote: 5.0.1
 URL: http://github.com/dcgerard/hose
 BugReports: http://github.com/dcgerard/hose/issues

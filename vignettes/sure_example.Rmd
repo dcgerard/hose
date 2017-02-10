@@ -28,8 +28,7 @@ fnorm_mean <- sqrt(prod(p)) * sqrt(tau2) / 2 ## so on same order as error
 U_temp <- tensr::hosvd(array(stats::rnorm(prod(p)), dim = p))$U
 U2_temp <- list()
 S_temp <- tensr::holq(array(stats::rnorm(prod(p)), dim = r), print_diff = FALSE)$Z
-for(index in 1:n)
-{
+for(index in 1:n) {
     U2_temp[[index]] <- U_temp[[index]][ , 1:r[index]]
 }
 ## Our mean tensor.
@@ -47,8 +46,7 @@ Some scree plots of the three matricizations of the data `X` do not seem to sugg
 hosvd_x <- hosvd_full(X)
 par(cex.lab = 0.7, cex.main = 0.7, cex.axis = 0.7, mgp = c(1.2, 0.4, 0),
     mar = c(2.2, 2, 1.8, 0.5))
-for(index in 1:n)
-{
+for(index in 1:n) {
     plot(hosvd_x$D[[index]], type = "h", ylim = c(0, max(hosvd_x$D[[index]])),
          xlab = "Singular Value", ylab = "Value",
          main = paste0("Scree Plot for Mode ", index))
@@ -136,8 +134,7 @@ hosvd_soft <- hosvd_full(soft_out$est)
 
 par(cex.lab = 0.7, cex.main = 0.7, cex.axis = 0.7, mgp = c(1.2, 0.4, 0),
     mar = c(2.2, 2, 1.8, 0.5), pch = ".")
-for(mode_index in 1:n)
-{
+for(mode_index in 1:n) {
     plot(hosvd_soft$D[[mode_index]], type = "h", xlab = "Singular Value",
          ylab = "Value", main = paste0("Mode ", mode_index, " Scree Plot"),
          ylim = c(0, max(c(hosvd_soft$D[[mode_index]],

@@ -370,7 +370,7 @@ sgd_given_c <- function(c_obj, sgd_lambda, sgd_lambda_c, c_init = 1,
 
     ## use bernoulli to see if I draw a 0 for gradient
     p_1 <- prod(max_toget) / prod(p)
-    is_0 <- rbinom(1, 1, 1 - p_1)
+    is_0 <- stats::rbinom(1, 1, 1 - p_1)
 
     if (is_0 == 1) {
       lambda_new <- lambda_current

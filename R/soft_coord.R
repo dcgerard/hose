@@ -30,7 +30,6 @@ update_lambda <- function(c_obj, lambda_current, c_current, k, tau2,
   S <- hosvd_x$S
   p <- dim(S)
   n <- length(p)
-
   sig <- hosvd_x$D
 
   max_toget <- rep(NA, length = n)
@@ -89,6 +88,67 @@ update_lambda <- function(c_obj, lambda_current, c_current, k, tau2,
   }
   return(lambda_new)
 }
+
+
+
+#' Apply Brent's method to update the kth mode when soft-thresholding.
+#'
+#' @inheritParams update_lambda
+#'
+#' @author David Gerard
+#'
+#' @export
+update_lambda_brent <- function(c_obj, lambda_current, c_current, k, tau2) {
+    ## k = current mode to update
+    hosvd_x <- c_obj$hosvd_x
+    C_array <- c_obj$C_array
+    S <- hosvd_x$S
+    p <- dim(S)
+    n <- length(p)
+    sig <- hosvd_x$D
+
+    oout <- stats::optim(par = lambda_current[k], fn = sure_given_c_one_mode, method = "Brent",
+                         lower = 0, upper = max(sig[[k]]), c_obj = c_obj, 
+                         lambda_current = lambda_current, c_current = c_current,
+                         current_mode = k, tau2 = tau2)      
+    
+     return(list(lambda_new = oout$par, sure = oout$value))
+}
+
+#' Wrapper for \code{\link{sure_given_c}} when only updating one mode.
+#' 
+#' @inheritParams update_lambda
+#' @param lambda A numeric scalar. The current value of the lambda you are updating.
+#' @param current_mode The current mode for which lambda is a member.
+#' 
+#' @author David Gerard
+sure_given_c_one_mode <- function(lambda, c_obj, lambda_current, c_current, current_mode, tau2) {
+  n <- length(lambda_current)
+  
+  ## set up the lasso function -----------------------------------------------
+  func_lasso <- list()
+  dfunc_lasso <- list()
+  func_lasso[[1]] <- f_lasso_mult
+  dfunc_lasso[[1]] <- df_lasso_mult
+  for (mode_index in 2:n) {
+    func_lasso[[mode_index]] <- f_lasso
+    dfunc_lasso[[mode_index]] <- df_lasso
+  }
+  
+  lambda_current[current_mode] <- lambda
+  
+  lambda_list <- list()
+  lambda_list[[1]] <- c(lambda_current[1], c_current)
+  for (index in 2:n) {
+    lambda_list[[index]] <- lambda_current[index]
+  }
+
+  sout <- sure_given_c(obj = c_obj, func = func_lasso, dfunc = dfunc_lasso,
+                       lambda = lambda_list, tau2 = tau2)
+  return(sout$sure_val)
+}
+
+
 
 ##' Update scale parameter in scale and soft-thresholding HOSE's.
 ##'
@@ -222,22 +282,15 @@ soft_coord <- function(c_obj, lambda_init, c_init, itermax = 1000,
   while (error_all > tol & iter_index < itermax) {
     c_old <- c_current
     lambda_old <- lambda_current
-    for (k in 1:n) {
-      lambda_current[k] <-
-        update_lambda(c_obj, lambda_current, c_current, k, tau2)
-    }
+    old_sure <- current_sure
     c_current <- update_c(c_obj, lambda_current, c_current, tau2)
+    for (k in 1:n) {
+      bout <- update_lambda_brent(c_obj, lambda_current, c_current, k, tau2)
+      lambda_current[k] <- bout$lambda_new
+      current_sure <- bout$sure
+    }
 
     if (use_sure) {
-      old_sure <- current_sure
-      lambda_list <- list()
-      lambda_list[[1]] <- c(lambda_current[1], c_current)
-      for (mode_index in 2:n) {
-        lambda_list[[mode_index]] <- lambda_current[mode_index]
-      }
-      current_sure <-
-        sure_given_c(c_obj, func_lasso, dfunc_lasso,
-                     lambda = lambda_list, tau2 = tau2)$sure_val
       cat("     SURE =", round(current_sure, digits = 2), "\n")
       error_all <- abs(1 - current_sure / old_sure)
     } else {
