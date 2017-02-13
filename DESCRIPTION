@@ -2,7 +2,7 @@ Package: hose
 Type: Package
 Title: Functions to calculate higher-order spectral estimators and
      their corresponding unbiased estimates of the mean squared error
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("David", "Gerard", email = "dcgerard@uchicago.edu",
                   role = c("aut", "cre"))
 Description: Matrix spectral estimators shrink the singular values of a data
@@ -18,6 +18,8 @@ Imports:
     RMTstat,
     softImpute,
     assertthat
+Depends:
+    R (>= 2.10)
 RoxygenNote: 5.0.1
 URL: http://github.com/dcgerard/hose
 BugReports: http://github.com/dcgerard/hose/issues
