@@ -180,54 +180,64 @@ double_dl <- function(lambda_vec, r, rho, I_nbar) {
   return(dl)
 }
 
-#' Mode-wise MDL criterion.
+#' Matrix-specific ways to estimate the rank for each mode and then return the
+#' truncated HOSVD.
 #'
 #' @param Y A numeric array.
-#' @param return_est A logical. Should we return the estimate of the mean?
+#' @param rank_vec The multilinear rank of the underlying mean. If \code{NULL} then
+#'     the multilinear rank will be estimated.
+#' @param method The way to estimate the multilinear rank if \code{rank_vec = NULL}.
+#'     The methods allowed are parallel analysis (\code{"pa"}) from
+#'     \code{\link[sva]{num.sv}}, bicrossvalidation (\code{"bcv"})
+#'    from \code{\link[cate]{est.factor.num}},
+#'     and minimum description length (\code{"mdl"}) from \code{\link{mdl_eigen}}.
+#' @param return_est A logical. Should we return the final estimate from the
+#'     truncated HOSVD (\code{TRUE}) or note (\code{FALSE})?
 #'
 #' @author David Gerard
 #'
 #' @export
-mode_mdl <- function(Y, return_est = TRUE) {
-  ## Check input -----------------------------------------
+trunc_hosvd <- function(Y, rank_vec = NULL, method = c("pa", "bcv", "mdl"),
+            return_est = TRUE) {
+  ## Check input --------------------------------------------------
+  method <- match.arg(method)
   assertthat::assert_that(is.logical(return_est))
   assertthat::assert_that(is.array(Y))
+  if (method == "pa") {
+    if (!requireNamespace("sva", quietly = TRUE)) {
+      stop('sva needs to be installed if `method = "pa"`')
+    }
+  } else if (method == "bcv") {
+    if (!requireNamespace("cate", quietly = TRUE)) {
+      stop('cate needs to be installed if `method = "bcv"`')
+    }
+  }
 
-  ## run MDL ---------------------------------------------
+  ## Fit methods --------------------------------------------------
+  p <- dim(Y)
   y_hosvd <- hosvd_full(Y)
-  p <- dim(Y)
-  rank_vec <- rep(NA, length = length(p))
-  for (index in 1:length(p)) {
-    rank_vec[index] <- mdl_eigen(y_hosvd$D[[index]] ^ 2, rho = 1, I_nbar = prod(p) / p[index])$rank
+  if (!is.null(rank_vec)) {
+    skip_rank = TRUE
+    assertthat::are_equal(length(rank_vec), length(dim(Y)))
+    assertthat::assert_that(all(dim(Y) >= rank_vec))
+  } else {
+    rank_vec <- rep(NA, length = length(p))
+    skip_rank = FALSE
   }
-  ## calculate estimator and return -----------------------
-  return_list <- get_trunc_est(fit_hosvd = y_hosvd, rank_vec = rank_vec,
-                               return_est = return_est)
-  return(return_list)
-}
 
-#' A wrapper for \code{\link[sva]{num.sv}} for each mode.
-#'
-#' This function requires \code{sva}. To install \code{sva}, run in R:
-#' \code{source("https://bioconductor.org/biocLite.R")} then
-#' \code{biocLite("sva")}
-#'
-#' @inheritParams score_ylc
-#'
-#' @author David Gerard
-#'
-#' @export
-#'
-par_analysis_wrapper <- function(Y, return_est = TRUE) {
-  if (!requireNamespace("sva", quietly = TRUE)) {
-    stop("sva needs to be installed to use par_analysis_wrapper")
-  }
-  p <- dim(Y)
-  rank_vec <- rep(NA, length = length(p))
   for (index in 1:length(p)) {
-    rank_vec[index] <- sva::num.sv(dat = t(tensr::mat(A = Y, k = index)), mod = matrix(1, ncol = 1, nrow = p[index]))
+    if (skip_rank) {
+      ## do nothing
+    } else if (method == "pa") {
+      ## plus 1 because the mean is an sv
+      rank_vec[index] <- sva::num.sv(dat = t(tensr::mat(A = Y, k = index)), mod = matrix(1, ncol = 1, nrow = p[index])) + 1
+    } else if (method == "bcv") {
+      rank_vec[index] <- cate::est.factor.num(Y = tensr::mat(Y, index), method = "bcv", bcv.plot = FALSE)$r
+    } else if (method == "mdl") {
+      rank_vec[index] <- mdl_eigen(lambda_vec = y_hosvd$D[[index]] ^ 2, rho = 1, I_nbar = prod(p) / p[index])$rank_est
+    }
   }
-  return_list <- get_trunc_est(hosvd_full(Y), rank_vec = rank_vec, return_est = return_est)
+  return_list <- get_trunc_est(y_hosvd, rank_vec = rank_vec, return_est = return_est)
   return(return_list)
 }
 

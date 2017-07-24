@@ -14,10 +14,12 @@ test_that("meet works OK", {
   Y <- theta + E
   sout <- score_ylc(Y, return_est = TRUE)
   sout$rank
-  dout <- mode_mdl(Y)
+  dout <- trunc_hosvd(Y = Y, method = "mdl")
   dout$rank
-  svaout <- par_analysis_wrapper(Y)
+  svaout <- trunc_hosvd(Y = Y, method = "pa")
   svaout$rank
+  bcvout <- svaout <- trunc_hosvd(Y = Y, method = "bcv")
+  bcvout$rank
 
   ## test two implementations of MDL
   d <- svd(tensr::mat(Y, 2))$d ^ 2

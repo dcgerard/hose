@@ -26,5 +26,6 @@ BugReports: http://github.com/dcgerard/hose/issues
 Suggests: knitr,
     rmarkdown,
     covr,
-    sva
+    sva,
+    cate
 VignetteBuilder: knitr
