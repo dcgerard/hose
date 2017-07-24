@@ -117,22 +117,8 @@ score_ylc <- function(Y, rho = 0.01, sampmin = min(c(dim(Y), 5)),
   if (verbose) {
     cat("Rank: ", rank_vec, "\n")
   }
-  return_list <- list()
-  if (any(rank_vec == 0)) {
-    rank_vec <- rep(0, length = length(p))
-    return_list$rank <- rank_vec
-    if (return_est) {
-      return_list$est <- array(0, dim = p)
-    }
-  } else {
-    return_list$rank <- rank_vec
-    if (return_est) {
-      return_list$est <- array(y_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
-      for (index in 1:length(p)) {
-        return_list$est <- tensr::amprod(return_list$est, y_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
-      }
-    }
-  }
+  return_list <- get_trunc_est(fit_hosvd = y_hosvd, rank_vec = rank_vec,
+                               return_est = return_est)
   return(return_list)
 }
 
@@ -214,9 +200,49 @@ mode_mdl <- function(Y, return_est = TRUE) {
   for (index in 1:length(p)) {
     rank_vec[index] <- mdl_eigen(y_hosvd$D[[index]] ^ 2, rho = 1, I_nbar = prod(p) / p[index])$rank
   }
-
   ## calculate estimator and return -----------------------
+  return_list <- get_trunc_est(fit_hosvd = y_hosvd, rank_vec = rank_vec,
+                               return_est = return_est)
+  return(return_list)
+}
+
+#' A wrapper for \code{\link[sva]{num.sv}} for each mode.
+#'
+#' This function requires \code{sva}. To install \code{sva}, run in R:
+#' \code{source("https://bioconductor.org/biocLite.R")} then
+#' \code{biocLite("sva")}
+#'
+#' @inheritParams score_ylc
+#'
+#' @author David Gerard
+#'
+#' @export
+#'
+par_analysis_wrapper <- function(Y, return_est = TRUE) {
+  if (!requireNamespace("sva", quietly = TRUE)) {
+    stop("sva needs to be installed to use par_analysis_wrapper")
+  }
+  p <- dim(Y)
+  rank_vec <- rep(NA, length = length(p))
+  for (index in 1:length(p)) {
+    rank_vec[index] <- sva::num.sv(dat = t(tensr::mat(A = Y, k = index)), mod = matrix(1, ncol = 1, nrow = p[index]))
+  }
+  return_list <- get_trunc_est(hosvd_full(Y), rank_vec = rank_vec, return_est = return_est)
+  return(return_list)
+}
+
+#' Return the estimate from the truncated HOSVD given the hosvd and the rank.
+#'
+#' @param fit_hosvd The output from \code{\link{hosvd_full}}
+#' @param rank_vec The multilinear rank.
+#' @param return_est A logical. Should we return the estimate (\code{TRUE}),
+#'     or not (\code{FALSE})?
+#'
+#' @author David Gerard
+get_trunc_est <- function(fit_hosvd, rank_vec, return_est = TRUE) {
   return_list <- list()
+  p <- sapply(fit_hosvd$D, length)
+  assertthat::are_equal(length(rank_vec), length(p))
   if (any(rank_vec == 0)) {
     rank_vec <- rep(0, length = length(p))
     return_list$rank <- rank_vec
@@ -226,9 +252,9 @@ mode_mdl <- function(Y, return_est = TRUE) {
   } else {
     return_list$rank <- rank_vec
     if (return_est) {
-      return_list$est <- array(y_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
+      return_list$est <- array(fit_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
       for (index in 1:length(p)) {
-        return_list$est <- tensr::amprod(return_list$est, y_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
+        return_list$est <- tensr::amprod(return_list$est, fit_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
       }
     }
   }

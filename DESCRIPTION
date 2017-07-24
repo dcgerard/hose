@@ -25,5 +25,6 @@ URL: http://github.com/dcgerard/hose
 BugReports: http://github.com/dcgerard/hose/issues
 Suggests: knitr,
     rmarkdown,
-    covr
+    covr,
+    sva
 VignetteBuilder: knitr

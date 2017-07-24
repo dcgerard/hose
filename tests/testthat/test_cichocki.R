@@ -12,11 +12,12 @@ test_that("meet works OK", {
   theta <- tensr::atrans(S, U)
   theta <- theta * sqrt(sum(E ^ 2) / sum(theta ^ 2))
   Y <- theta + E
-  sout <- score_ylc(Y)
+  sout <- score_ylc(Y, return_est = TRUE)
   sout$rank
   dout <- mode_mdl(Y)
   dout$rank
-  mout <- meet(Y)
+  svaout <- par_analysis_wrapper(Y)
+  svaout$rank
 
   ## test two implementations of MDL
   d <- svd(tensr::mat(Y, 2))$d ^ 2
