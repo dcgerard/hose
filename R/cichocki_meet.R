@@ -127,9 +127,9 @@ score_ylc <- function(Y, rho = 0.01, sampmin = min(c(dim(Y), 5)),
   } else {
     return_list$rank <- rank_vec
     if (return_est) {
-      est <- array(y_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
+      return_list$est <- array(y_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
       for (index in 1:length(p)) {
-        est <- tensr::amprod(est, y_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
+        return_list$est <- tensr::amprod(return_list$est, y_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
       }
     }
   }
@@ -192,4 +192,45 @@ double_dl <- function(lambda_vec, r, rho, I_nbar) {
   dl <- -2 * log(numer / denom) * (rho * I_nbar * (I_n - r)) +
     r * (2 * I_n - r) * log(rho * I_nbar)
   return(dl)
+}
+
+#' Mode-wise MDL criterion.
+#'
+#' @param Y A numeric array.
+#' @param return_est A logical. Should we return the estimate of the mean?
+#'
+#' @author David Gerard
+#'
+#' @export
+mode_mdl <- function(Y, return_est = TRUE) {
+  ## Check input -----------------------------------------
+  assertthat::assert_that(is.logical(return_est))
+  assertthat::assert_that(is.array(Y))
+
+  ## run MDL ---------------------------------------------
+  y_hosvd <- hosvd_full(Y)
+  p <- dim(Y)
+  rank_vec <- rep(NA, length = length(p))
+  for (index in 1:length(p)) {
+    rank_vec[index] <- mdl_eigen(y_hosvd$D[[index]] ^ 2, rho = 1, I_nbar = prod(p) / p[index])$rank
+  }
+
+  ## calculate estimator and return -----------------------
+  return_list <- list()
+  if (any(rank_vec == 0)) {
+    rank_vec <- rep(0, length = length(p))
+    return_list$rank <- rank_vec
+    if (return_est) {
+      return_list$est <- array(0, dim = p)
+    }
+  } else {
+    return_list$rank <- rank_vec
+    if (return_est) {
+      return_list$est <- array(y_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
+      for (index in 1:length(p)) {
+        return_list$est <- tensr::amprod(return_list$est, y_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
+      }
+    }
+  }
+  return(return_list)
 }

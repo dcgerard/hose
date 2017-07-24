@@ -3,7 +3,7 @@ context("cichocki")
 test_that("meet works OK", {
   set.seed(9)
   p <- c(10, 10, 10)
-  m <- c(3, 3, 3)
+  m <- c(5, 5, 5)
   E <- array(stats::rnorm(prod(p), sd = 1), dim = p)
   S <- array(stats::rnorm(prod(m)), dim = m)
   U <- list(matrix(stats::rnorm(m[1] * p[1]), nrow = p[1]),
@@ -13,6 +13,9 @@ test_that("meet works OK", {
   theta <- theta * sqrt(sum(E ^ 2) / sum(theta ^ 2))
   Y <- theta + E
   sout <- score_ylc(Y)
+  sout$rank
+  dout <- mode_mdl(Y)
+  dout$rank
   mout <- meet(Y)
 
   ## test two implementations of MDL
