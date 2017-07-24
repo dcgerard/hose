@@ -4,7 +4,8 @@
 \alias{score_ylc}
 \title{SCORE method from Yokota, Lee, and Cichoki (2017).}
 \usage{
-score_ylc(Y, rho = 0.01, sampmin = min(c(dim(Y), 5)), return_est = TRUE)
+score_ylc(Y, rho = 0.01, sampmin = min(c(dim(Y), 5)), return_est = TRUE,
+  verbose = FALSE)
 }
 \arguments{
 \item{Y}{An array of numerics.}
@@ -17,6 +18,8 @@ in calculating the mode-specific modified singular values.}
 
 \item{return_est}{A logical. Should we return the truncated HOSVD
 (\code{TRUE}) or not (\code{FALSE})?}
+
+\item{verbose}{A logical. Should we print a lot?}
 }
 \description{
 Implements the "Sparse CORE" method from Yokota, Lee, and Cichocki (2017).

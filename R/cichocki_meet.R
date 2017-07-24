@@ -81,6 +81,7 @@ meet <- function(Y, tau2 = NULL) {
 #'     in calculating the mode-specific modified singular values.
 #' @param return_est A logical. Should we return the truncated HOSVD
 #'     (\code{TRUE}) or not (\code{FALSE})?
+#' @param verbose A logical. Should we print a lot?
 #'
 #' @author David Gerard
 #'
@@ -88,11 +89,12 @@ meet <- function(Y, tau2 = NULL) {
 #'
 #' @export
 score_ylc <- function(Y, rho = 0.01, sampmin = min(c(dim(Y), 5)),
-                      return_est = TRUE) {
+                      return_est = TRUE, verbose = FALSE) {
   ## Check input -----------------------------------------------------
-  assertthat::are_equal(is.logical(return_est), TRUE)
+  assertthat::assert_that(is.logical(return_est))
   assertthat::assert_that(rho < 1, rho > 0)
-  assertthat::assert_that(sampmin > 0, sampmin <= min(dim(Y)))
+  assertthat::assert_that(sampmin > 0, sampmin <= min(prod(dim(Y)) / dim(Y)))
+  assertthat::assert_that(is.logical(verbose))
 
   p <- dim(Y)
   y_hosvd <- hosvd_full(Y)
@@ -112,12 +114,23 @@ score_ylc <- function(Y, rho = 0.01, sampmin = min(c(dim(Y), 5)),
     mdlout <- mdl_eigen(lambda_vec = mod_lambda, rho = mod_rho, I_nbar = ncol(S_k2))
     rank_vec[index] <- mdlout$rank
   }
+  if (verbose) {
+    cat("Rank: ", rank_vec, "\n")
+  }
   return_list <- list()
-  return_list$rank = rank_vec
-  if (return_est) {
-    est <- array(y_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
-    for (index in 1:length(p)) {
-      est <- tensr::amprod(est, y_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
+  if (any(rank_vec == 0)) {
+    rank_vec <- rep(0, length = length(p))
+    return_list$rank <- rank_vec
+    if (return_est) {
+      return_list$est <- array(0, dim = p)
+    }
+  } else {
+    return_list$rank <- rank_vec
+    if (return_est) {
+      est <- array(y_hosvd$S[as.matrix(expand.grid(lapply(rank_vec, FUN = seq, from = 1))), drop = FALSE] , dim = rank_vec)
+      for (index in 1:length(p)) {
+        est <- tensr::amprod(est, y_hosvd$U[[index]][, 1:rank_vec[index], drop = FALSE], index)
+      }
     }
   }
   return(return_list)
