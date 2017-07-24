@@ -33,13 +33,12 @@ conditions on the core array and (2) it will also return the mode-specific singu
 \href{http://epubs.siam.org/doi/abs/10.1137/S0895479896305696}{ De Lathauwer
 et. al. (2000)}.
 }
-\author{
-David Gerard.
-}
 \references{
 De Lathauwer, L., De Moor, B., & Vandewalle, J. (2000).
   \href{http://epubs.siam.org/doi/abs/10.1137/S0895479896305696}{A
   multilinear singular value decomposition}. \emph{SIAM journal on Matrix
   Analysis and Applications}, 21(4), 1253-1278.
 }
-
+\author{
+David Gerard.
+}

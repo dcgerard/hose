@@ -32,9 +32,6 @@ the cross-validation-ish procedure at each iteration (TRUE) or not (FALSE)?}
 Hold out some data from a matrix and use \code{softImpute} to complete the 
 matrix. The tuning parameter with the smallest prediction error is selected.
 }
-\author{
-David Gerard
-}
 \references{
 Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani. 
   \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal 
@@ -45,4 +42,6 @@ Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani.
 \code{\link{sig_soft}} that calls \code{soft_cv} to find the optimal
   lambda.
 }
-
+\author{
+David Gerard
+}

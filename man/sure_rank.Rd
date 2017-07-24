@@ -29,12 +29,11 @@ sure_rank(X, max_nrank = dim(X), tau2 = 1)
 Iterate through all ranks less than max_nrank and choose rank with smallest
 sure.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
 \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral Estimators}.
 \emph{arXiv preprint} arXiv:1505.02114.
 }
-
+\author{
+David Gerard.
+}

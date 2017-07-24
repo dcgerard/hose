@@ -38,9 +38,6 @@ matrix-specific variance estimation procedues along each matricization of the
 data tensor to estimate the variance. These estimates are then averaged to
 provide the final estimate of the variance.
 }
-\author{
-David Gerard
-}
 \references{
 Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani.
   \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal
@@ -58,4 +55,6 @@ Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani.
   framework, and \code{\link{sig_naive}} for a basic estimator when the
   multilinear rank is known.
 }
-
+\author{
+David Gerard
+}

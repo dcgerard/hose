@@ -18,4 +18,3 @@ Sums elements in a list.
 \author{
 David Gerard.
 }
-

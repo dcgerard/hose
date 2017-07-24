@@ -14,10 +14,9 @@ f_lasso(x, lambda)
 \description{
 Soft thresholding shrinkage function. Same as lasso for spectral shrinkage.
 }
-\author{
-David Gerard.
-}
 \seealso{
 \code{\link{df_lasso}}.
 }
-
+\author{
+David Gerard.
+}

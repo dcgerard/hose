@@ -38,12 +38,11 @@ r)}. This is the estimator implemented here. It seems to have
 reasonable performance when the rank is small.  Though the biggest
 drawback here is that you have to know the rank ahead of time.
 }
-\author{
-David Gerard
-}
 \references{
 Choi, Yunjin, Jonathan Taylor, and Robert
     Tibshirani. \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal components: Estimation of the true rank of a noisy matrix."}
     arXiv preprint arXiv:1410.8260 (2014).
 }
-
+\author{
+David Gerard
+}

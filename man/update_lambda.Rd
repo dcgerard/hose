@@ -29,9 +29,6 @@ parameter.}
 \description{
 Update of thresholding parameter for scale and soft-thresholding HOSEs.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -40,4 +37,6 @@ Gerard, D., & Hoff, P. (2015).
 \seealso{
 \code{\link{soft_coord}}.
 }
-
+\author{
+David Gerard.
+}

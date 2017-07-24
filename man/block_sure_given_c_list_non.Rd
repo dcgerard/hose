@@ -29,9 +29,6 @@ block_sure_given_c_list_non(c_obj, func, dfunc, lambda_list, tau2 = 1)
 Calculates the SURE of estimators that shrink non-overlapping sub-tensors
 using the output of \code{\link{get_c_list_non}}.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -40,4 +37,6 @@ Gerard, D., & Hoff, P. (2015).
 \seealso{
 \code{\link{get_c_list_non}}, \code{\link{block_sure_non}}.
 }
-
+\author{
+David Gerard.
+}

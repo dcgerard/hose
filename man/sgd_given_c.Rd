@@ -41,12 +41,11 @@ worthwhile considering that \code{\link{soft_coord}} works pretty well.
 Also, we have to call \code{\link{get_c}} anyway, so not sure if this function
 actually reduces the computational complexity.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
   Estimators}. \emph{arXiv preprint} arXiv:1505.02114.
 }
-
+\author{
+David Gerard.
+}

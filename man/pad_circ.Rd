@@ -18,4 +18,3 @@ Adds a circular padding after matrix.
 \author{
 David Gerard.
 }
-

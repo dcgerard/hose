@@ -47,4 +47,3 @@ the Western Conference of the National Basketball League (NBA).
 \code{\link{east}}
 }
 \keyword{datasets}
-

@@ -26,4 +26,3 @@ Apply Brent's method to update the kth mode when soft-thresholding.
 \author{
 David Gerard
 }
-

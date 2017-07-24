@@ -14,10 +14,9 @@ f_truncate(x, r)
 \description{
 Truncation spectral function.
 }
-\author{
-David Gerard.
-}
 \seealso{
 \code{\link{df_truncate}}.
 }
-
+\author{
+David Gerard.
+}

@@ -44,9 +44,6 @@ estimation procedure so far, but also takes the longest.
 You can try out different values of \code{c_val} with the outputs
 of \code{sse} and \code{dfLambda}
 }
-\author{
-David Gerard
-}
 \references{
 Choi, Yunjin, Jonathan Taylor, and Robert
     Tibshirani. \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal components: Estimation of the true rank of a noisy matrix."}
@@ -55,4 +52,6 @@ Choi, Yunjin, Jonathan Taylor, and Robert
 \seealso{
 \code{\link{soft_cv}} for the cross-validation-ish procedure.
 }
-
+\author{
+David Gerard
+}

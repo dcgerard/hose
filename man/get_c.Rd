@@ -24,9 +24,6 @@ estimators.
 this function only calculates C and the HOSVD so that calculating SURE is
 faster when doing it over and over again
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -45,4 +42,6 @@ Gerard, D., & Hoff, P. (2015).
   \code{\link{soft_coord}} for a coordinate descent algorithm for finding
   the optimal sure using the output from \code{get_c}.
 }
-
+\author{
+David Gerard.
+}

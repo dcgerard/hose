@@ -47,4 +47,3 @@ the Eastern Conference of the National Basketball League (NBA).
 \code{\link{west}}
 }
 \keyword{datasets}
-

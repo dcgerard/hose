@@ -44,9 +44,6 @@ of the deviation of the ratio of adjacent SURE values from 1
 Runs an iterative coordinate descent algorithm to minimize the SURE for
 mode-specific soft thresholding estimators.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -56,4 +53,6 @@ Gerard, D., & Hoff, P. (2015).
 \code{\link{update_c}}, \code{\link{update_lambda}},
   \code{\link{get_c}}.
 }
-
+\author{
+David Gerard.
+}

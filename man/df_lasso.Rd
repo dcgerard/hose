@@ -14,10 +14,9 @@ df_lasso(x, lambda)
 \description{
 Derivative of soft thresholding shrinkage function.
 }
-\author{
-David Gerard.
-}
 \seealso{
 \code{\link{f_lasso}}.
 }
-
+\author{
+David Gerard.
+}

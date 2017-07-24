@@ -20,9 +20,6 @@ A list of elements used in \code{\link{block_sure_given_c_list}} to
 Calculates the necessary components to calculate the SURE for estimators
 that block shrink overlapping blocks.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -31,4 +28,6 @@ Gerard, D., & Hoff, P. (2015).
 \seealso{
 \code{\link{block_sure_given_c_list}}, \code{\link{block_sure}}.
 }
-
+\author{
+David Gerard.
+}

@@ -15,10 +15,9 @@ scaling parameter, \code{param[2]} is the threshholding parameter.}
 \description{
 Derivative of scaling and soft thresholding shrinkage function.
 }
-\author{
-David Gerard.
-}
 \seealso{
 \code{\link{f_lasso_mult}}.
 }
-
+\author{
+David Gerard.
+}

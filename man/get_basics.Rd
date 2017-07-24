@@ -19,9 +19,6 @@ A list of objects meant to be fed into
 Calculates necessary components to calculate the SURE for estimators that
 shrink the individual elements of the core array.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -30,4 +27,6 @@ Gerard, D., & Hoff, P. (2015).
 \seealso{
 \code{\link{sure_given_basics}}, \code{\link{sure_S}}
 }
-
+\author{
+David Gerard.
+}

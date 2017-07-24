@@ -14,10 +14,9 @@ df_S_lasso(S, lambda)
 \description{
 Derivative of soft thresholding a core array.
 }
-\author{
-David Gerard.
-}
 \seealso{
 \code{\link{df_S_lasso}}.
 }
-
+\author{
+David Gerard.
+}

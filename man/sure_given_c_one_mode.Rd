@@ -29,4 +29,3 @@ Wrapper for \code{\link{sure_given_c}} when only updating one mode.
 \author{
 David Gerard
 }
-

@@ -15,13 +15,12 @@ stein(X, tau2 = 1)
 \description{
 Stein's estimator.
 }
-\author{
-David Gerard.
-}
 \references{
 James, W., & Stein, C. (1961, June).
   \href{http://projecteuclid.org/euclid.bsmsp/1200512173}{Estimation with
   quadratic loss}. \emph{In Proceedings of the fourth Berkeley symposium on
   mathematical statistics and probability} (Vol. 1, No. 1961, pp. 361-379).
 }
-
+\author{
+David Gerard.
+}

@@ -16,4 +16,3 @@ Returns an object whose elements are the positive parts of the elements of
 \author{
 David Gerard.
 }
-

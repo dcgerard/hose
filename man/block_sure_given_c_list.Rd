@@ -29,9 +29,6 @@ block_sure_given_c_list(c_obj, func, dfunc, lambda_list, tau2 = 1)
 Calculates the sure of estimators that shrink subtensors using the output of
 \code{\link{get_c_list}}.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -40,4 +37,6 @@ Gerard, D., & Hoff, P. (2015).
 \seealso{
 \code{\link{get_c_list}}, \code{\link{block_sure}}.
 }
-
+\author{
+David Gerard.
+}

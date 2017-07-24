@@ -19,13 +19,12 @@ sure_matrix(d, lambda, p_dim, tau2 = 1)
 \description{
 Only works for soft thresholding.
 }
-\author{
-David Gerard.
-}
 \references{
 Candes, E., Sing-Long, C. A., & Trzasko, J. D. (2013).
   \href{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6545395&tag=1}{Unbiased
    risk estimates for singular value thresholding and spectral estimators}.
   \emph{Signal Processing, IEEE Transactions on}, 61(19), 4643-4657.
 }
-
+\author{
+David Gerard.
+}

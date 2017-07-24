@@ -15,13 +15,12 @@ min_ef(X, tau2 = 1)
 \description{
 Min Efron-Morris estimator.
 }
-\author{
-David Gerard
-}
 \references{
 Efron, B., & Morris, C. (1972).
   \href{http://biomet.oxfordjournals.org/content/59/2/335.short}{Empirical
   Bayes on vector observations: An extension of Stein's method}.
   \emph{Biometrika}, 59(2), 335-347.
 }
-
+\author{
+David Gerard
+}

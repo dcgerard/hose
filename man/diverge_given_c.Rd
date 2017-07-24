@@ -27,9 +27,6 @@ Assumes we already did all of the heavy lifting in calculating the HOSVD and
 the 'C' matrix from my write-up 'sure_pdf'. Call \code{\link{get_c}} before
 using this function.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -38,4 +35,6 @@ Gerard, D., & Hoff, P. (2015).
 \seealso{
 \code{\link{get_c}}, \code{\link{sure_given_c}}.
 }
-
+\author{
+David Gerard.
+}

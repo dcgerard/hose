@@ -27,9 +27,6 @@ sure_S(X, func, dfunc, params, tau2 = 1)
 \description{
 Wrapper for \code{\link{get_basics}} and \code{\link{sure_given_basics}}.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -38,4 +35,6 @@ Gerard, D., & Hoff, P. (2015).
 \seealso{
 \code{\link{get_basics}}, \code{\link{sure_given_basics}}.
 }
-
+\author{
+David Gerard.
+}

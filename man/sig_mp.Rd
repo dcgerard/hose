@@ -35,9 +35,6 @@ the variance of the data matrix. This estimator works really well
 when the rank is much less than the dimensions of the matrix and
 really poorly otherwise.
 }
-\author{
-David Gerard
-}
 \references{
 Gavish, M., & Donoho,
     D. L. (2014). \href{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6846297&tag=1}{The
@@ -45,4 +42,6 @@ Gavish, M., & Donoho,
     4/sqrt(3)}. Information Theory, IEEE Transactions on, 60(8),
     5040-5053.
 }
-
+\author{
+David Gerard
+}

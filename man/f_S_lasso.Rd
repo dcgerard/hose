@@ -14,10 +14,9 @@ f_S_lasso(S, lambda)
 \description{
 Soft thresholding a core array.
 }
-\author{
-David Gerard.
-}
 \seealso{
 \code{\link{df_S_lasso}}.
 }
-
+\author{
+David Gerard.
+}

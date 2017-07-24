@@ -20,9 +20,6 @@ A list of elements used in \code{\link{block_sure_given_c_list_non}}
 Calculates the necessary components to calculate the SURE for estimators
 that shrink non-overlapping sub-tensors.
 }
-\author{
-David Gerard.
-}
 \references{
 Gerard, D., & Hoff, P. (2015).
   \href{http://arxiv.org/abs/1505.02114}{Adaptive Higher-order Spectral
@@ -32,4 +29,6 @@ Gerard, D., & Hoff, P. (2015).
 \code{\link{block_sure_given_c_list_non}},
   \code{\link{block_sure_non}}
 }
-
+\author{
+David Gerard.
+}
