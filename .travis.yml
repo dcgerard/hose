@@ -1,6 +1,10 @@
 language: r
 cache: packages
 
+env:
+  global:
+    - _R_CHECK_FORCE_SUGGESTS_=FALSE
+
 bioc_packages: sva
 
 after_success:
