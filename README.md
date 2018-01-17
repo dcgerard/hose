@@ -23,17 +23,23 @@ Citation
 
 If you find these methods useful, please cite
 
-Gerard, D., & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http://arxiv.org/pdf/1505.02114v1.pdf). *arXiv preprint arXiv:1505.02114*.
+**Gerard, D.**, & Hoff, P. (2015). Adaptive higher-order spectral estimators. Electronic Journal of Statistics, 11(2), 3703-3737 [\[Link to EJS\]](http://dx.doi.org/10.1214/17-EJS1330) [\[Link to arXiv\]](https://arxiv.org/abs/1505.02114)
 
 Or, using BibTex:
 
 ``` tex
-@article{gerard2015adaptive,
-  title={Adaptive Higher-order Spectral Estimators},
-  author={Gerard, David and Hoff, Peter},
-  journal={arXiv preprint arXiv:1505.02114},
-  url={http://arxiv.org/abs/1505.02114},
-  year={2015}
+@ARTICLE{gerard2017adaptive,
+    AUTHOR = {David Gerard and Peter Hoff},
+     TITLE = {Adaptive higher-order spectral estimators},
+   JOURNAL = {Electron. J. Statist.},
+  FJOURNAL = {Electronic Journal of Statistics},
+      YEAR = {2017},
+    VOLUME = {11},
+    NUMBER = {2},
+     PAGES = {3703-3737},
+      ISSN = {1935-7524},
+       DOI = {10.1214/17-EJS1330},
+      SICI = {1935-7524(2017)11:2<3703:AHOSE>2.0.CO;2-Q},
 }
 ```
 
@@ -66,7 +72,7 @@ utils::vignette("sure_example", package = "hose")
 References
 ==========
 
-**Gerard, D.**, & Hoff, P. (2015). [Adaptive higher-order spectral estimators](http://arxiv.org/pdf/1505.02114v1.pdf). *arXiv preprint arXiv:1505.02114*.
+**Gerard, D.**, & Hoff, P. (2015). Adaptive higher-order spectral estimators. Electronic Journal of Statistics, 11(2), 3703-3737 [\[Link to EJS\]](http://dx.doi.org/10.1214/17-EJS1330) [\[Link to arXiv\]](https://arxiv.org/abs/1505.02114)
 
 Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle. [A multilinear singular value decomposition](http://epubs.siam.org/doi/abs/10.1137/S0895479896305696) . *SIAM J. Matrix Anal. Appl.*, 21(4):1253–1278 (electronic), 2000. ISSN 0895-4798. doi: 10.1137/S0895479896305696.
 
