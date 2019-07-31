@@ -94,17 +94,13 @@ devtools::install_github("dcgerard/hose")
 # Vignette
 
 I've provided a vignette demonstrating the methods available in
-`hose`. You can find it
-[here](http://dcgerard.github.io/code/sure_example.html). Or you can
-build the vignette on install with
-
+`hose`. You can find it [here](http://dcgerard.github.io/hose/). 
+Or you can build the vignette on install with
 ```{r, eval = FALSE}
 install.packages("devtools")
 devtools::install_github("dcgerard/hose", build_vignettes = TRUE)
 ```
-
 and access the vignette by running the following code in R:
-
 ```{r, eval = FALSE}
 utils::vignette("sure_example", package = "hose")
 ```
