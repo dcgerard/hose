@@ -5,9 +5,10 @@
 \title{Runs a stochastic gradient descent to minimize SURE for higher-order
 spectral estimators.}
 \usage{
-sgd_given_c(c_obj, sgd_lambda, sgd_lambda_c, c_init = 1, lambda_init = NULL,
-  sgd_c = 1/2 + 0.001, itermax = 10000, tau2 = 1, print_current = TRUE,
-  every_iter = 1000, alpha = 0.2, calc_final = TRUE)
+sgd_given_c(c_obj, sgd_lambda, sgd_lambda_c, c_init = 1,
+  lambda_init = NULL, sgd_c = 1/2 + 0.001, itermax = 10000,
+  tau2 = 1, print_current = TRUE, every_iter = 1000, alpha = 0.2,
+  calc_final = TRUE)
 }
 \arguments{
 \item{c_obj}{= Output from \code{\link{get_c}}.}

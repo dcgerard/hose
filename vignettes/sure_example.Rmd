@@ -16,6 +16,7 @@ and using SURE as an estimator selection procedure.
 ## Generate Simulated Data.
 First, we'll load the `hose` package and create some simulated data whose mean is actually low multilinear rank. `X` is a $10 \times 10 \times 10$ tensor that has multilinear rank $2 \times 2 \times 2$. We use the `holq` function from the `tensr` package to simulate a tensor whose first two singular values along each mode are approximately equal.
 ```{r}
+library(tensr)
 library(hose)
 set.seed(328)
 
@@ -172,6 +173,7 @@ cat(
     "                       X:", round(tensr::fnorm(X - Theta)), "\n\n")
 ```
 
+## References
 
 Candes, E., Sing-Long, C. A., & Trzasko, J. D. (2013). Unbiased risk estimates for singular value thresholding and spectral estimators. *Signal Processing, IEEE Transactions on*, 61(19), 4643-4657.
 

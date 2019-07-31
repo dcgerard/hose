@@ -4,8 +4,8 @@
 \alias{sure_given_c_one_mode}
 \title{Wrapper for \code{\link{sure_given_c}} when only updating one mode.}
 \usage{
-sure_given_c_one_mode(lambda, c_obj, lambda_current, c_current, current_mode,
-  tau2)
+sure_given_c_one_mode(lambda, c_obj, lambda_current, c_current,
+  current_mode, tau2)
 }
 \arguments{
 \item{lambda}{A numeric scalar. The current value of the lambda you are updating.}

@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Derivative of soft thresholding shrinkage function. — df_lasso • hose</title>
+<title>Implements the Modified eivgenvalues estimator for Tucker rank determination (MEET) algorithm
+from Yokota, Lee, and Cichocki (2017). — meet • hose</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +31,11 @@
 
 
 
-<meta property="og:title" content="Derivative of soft thresholding shrinkage function. — df_lasso" />
+<meta property="og:title" content="Implements the Modified eivgenvalues estimator for Tucker rank determination (MEET) algorithm
+from Yokota, Lee, and Cichocki (2017). — meet" />
 
-<meta property="og:description" content="Derivative of soft thresholding shrinkage function." />
+<meta property="og:description" content="The model is $$Y = A + E,$$ where A is a low-rank matrix and E is
+the noise matrix is i.i.d. N(0,s) entries. s is not assumed to be known." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,35 +114,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Derivative of soft thresholding shrinkage function.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dcgerard/hose/blob/master/R/shrinkage_functions.R'><code>R/shrinkage_functions.R</code></a></small>
-    <div class="hidden name"><code>df_lasso.Rd</code></div>
+    <h1>Implements the Modified eivgenvalues estimator for Tucker rank determination (MEET) algorithm
+from Yokota, Lee, and Cichocki (2017).</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dcgerard/hose/blob/master/R/cichocki_meet.R'><code>R/cichocki_meet.R</code></a></small>
+    <div class="hidden name"><code>meet.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Derivative of soft thresholding shrinkage function.</p>
+    <p>The model is $$Y = A + E,$$ where A is a low-rank matrix and E is
+the noise matrix is i.i.d. N(0,s) entries. s is not assumed to be known.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>df_lasso</span>(<span class='no'>x</span>, <span class='no'>lambda</span>)</pre>
+    <pre class="usage"><span class='fu'>meet</span>(<span class='no'>Y</span>, <span class='kw'>tau2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A vector of numerics.</p></td>
+      <th>Y</th>
+      <td><p>A numeric array.</p></td>
     </tr>
     <tr>
-      <th>lambda</th>
-      <td><p>A numeric. The threshholding parameter.</p></td>
+      <th>tau2</th>
+      <td><p>The known variance. Will be estimated if missing. Not supported yet.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p><code><a href='f_lasso.html'>f_lasso</a></code>.</p></div>
+    <p>A list with two elements: <code>rank</code> the estimated multilinear rank of the tensor and
+    <code>sigma</code> a vector of the estimated variance when using each mode.</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Yokota, Tatsuya, Namgil Lee, and Andrzej Cichocki. "Robust multilinear tensor rank estimation using higher order singular value decomposition and information criteria." IEEE Transactions on Signal Processing 65.5 (2017): 1196-1206. DOI: 10.1109/TSP.2016.2620965</p>
     
 
   </div>
@@ -148,11 +158,13 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#references">References</a></li>
           </ul>
 
     <h2>Author</h2>
-    <p>David Gerard.</p>
+    <p>David Gerard</p>
   </div>
 </div>
 

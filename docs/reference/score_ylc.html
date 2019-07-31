@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Derivative of soft thresholding shrinkage function. — df_lasso • hose</title>
+<title>SCORE method from Yokota, Lee, and Cichoki (2017). — score_ylc • hose</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,15 @@
 
 
 
-<meta property="og:title" content="Derivative of soft thresholding shrinkage function. — df_lasso" />
+<meta property="og:title" content="SCORE method from Yokota, Lee, and Cichoki (2017). — score_ylc" />
 
-<meta property="og:description" content="Derivative of soft thresholding shrinkage function." />
+<meta property="og:description" content="Implements the &quot;Sparse CORE&quot; method from Yokota, Lee, and Cichocki (2017).
+The idea is that one uses only a subset of the core array from the HOSVD
+to calculate the &quot;modified&quot; singular values. Then one uses the minimum
+description length (see mdl_eigen) criteria to choose the rank
+of the array. The porportion of the core should be small. We have one percent
+as the default as suggested in their paper, but my guess is that this should
+actually depend on the rank of the mean tensor." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,35 +117,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Derivative of soft thresholding shrinkage function.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dcgerard/hose/blob/master/R/shrinkage_functions.R'><code>R/shrinkage_functions.R</code></a></small>
-    <div class="hidden name"><code>df_lasso.Rd</code></div>
+    <h1>SCORE method from Yokota, Lee, and Cichoki (2017).</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dcgerard/hose/blob/master/R/cichocki_meet.R'><code>R/cichocki_meet.R</code></a></small>
+    <div class="hidden name"><code>score_ylc.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Derivative of soft thresholding shrinkage function.</p>
+    <p>Implements the "Sparse CORE" method from Yokota, Lee, and Cichocki (2017).
+The idea is that one uses only a subset of the core array from the HOSVD
+to calculate the "modified" singular values. Then one uses the minimum
+description length (see <code><a href='mdl_eigen.html'>mdl_eigen</a></code>) criteria to choose the rank
+of the array. The porportion of the core should be small. We have one percent
+as the default as suggested in their paper, but my guess is that this should
+actually depend on the rank of the mean tensor.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>df_lasso</span>(<span class='no'>x</span>, <span class='no'>lambda</span>)</pre>
+    <pre class="usage"><span class='fu'>score_ylc</span>(<span class='no'>Y</span>, <span class='kw'>rho</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>sampmin</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Extremes'>min</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/dim'>dim</a></span>(<span class='no'>Y</span>), <span class='fl'>5</span>)),
+  <span class='kw'>return_est</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A vector of numerics.</p></td>
+      <th>Y</th>
+      <td><p>An array of numerics.</p></td>
     </tr>
     <tr>
-      <th>lambda</th>
-      <td><p>A numeric. The threshholding parameter.</p></td>
+      <th>rho</th>
+      <td><p>The proportion of the core array to use to calcuate the
+mode-specific modified singular values.</p></td>
+    </tr>
+    <tr>
+      <th>sampmin</th>
+      <td><p>The minimum number of columns to of the core to use
+in calculating the mode-specific modified singular values.</p></td>
+    </tr>
+    <tr>
+      <th>return_est</th>
+      <td><p>A logical. Should we return the truncated HOSVD
+(<code>TRUE</code>) or not (<code>FALSE</code>)?</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>A logical. Should we print a lot?</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <div class='dont-index'><p><code><a href='f_lasso.html'>f_lasso</a></code>.</p></div>
+    <p>Yokota, Tatsuya, Namgil Lee, and Andrzej Cichocki. "Robust multilinear tensor rank estimation using higher order singular value decomposition and information criteria." IEEE Transactions on Signal Processing 65.5 (2017): 1196-1206. DOI: 10.1109/TSP.2016.2620965</p>
     
 
   </div>
@@ -148,11 +176,11 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#references">References</a></li>
           </ul>
 
     <h2>Author</h2>
-    <p>David Gerard.</p>
+    <p>David Gerard</p>
   </div>
 </div>
 

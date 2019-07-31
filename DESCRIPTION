@@ -1,16 +1,18 @@
 Package: hose
 Type: Package
-Title: Functions to calculate higher-order spectral estimators and
-     their corresponding unbiased estimates of the mean squared error
-Version: 0.1.2
+Title: Higher-order spectral estimators
+Version: 1.0.0
 Authors@R: person("David", "Gerard", email = "dcgerard@uchicago.edu",
                   role = c("aut", "cre"))
-Description: Matrix spectral estimators shrink the singular values of a data
-  matrix while keeping the singular vectors unchanged. Higher-order spectral
-  estimators (HOSE) are generalizations of these matrix estimators to tensors.
-  HOSEs usually contain tuning parameters that must be chosen by the user. This
-  package provides methods to calculate these HOSEs and choose these tuning
-  parameters by minimizing an unbiased estimate of the mean squared error.
+Description: Implements the higher-order spectral estimators (HOSE's)
+  of Gerard and Hoff (2017) <doi:10.1214/17-EJS1330>. Matrix spectral
+  estimators shrink the singular values of a data matrix while keeping
+  the singular vectors unchanged.  HOSE's are generalizations of these
+  matrix estimators to tensors.  HOSE's usually contain tuning
+  parameters that must be chosen by the user. This package provides
+  methods to calculate these HOSE's and choose these tuning parameters
+  by minimizing an unbiased estimate of the mean squared error.  The
+  main functions are get_c(), tensor_var_est(), and soft_coord().
 License: GPL-3
 LazyData: TRUE
 Imports:
@@ -19,8 +21,8 @@ Imports:
     softImpute,
     assertthat
 Depends:
-    R (>= 2.10)
-RoxygenNote: 6.0.1
+    R (>= 3.4)
+RoxygenNote: 6.1.1
 URL: http://github.com/dcgerard/hose
 BugReports: http://github.com/dcgerard/hose/issues
 Suggests: knitr,

@@ -1,0 +1,18 @@
+bibentry(bibtype   = "Article",
+         title     = "Adaptive higher-order spectral estimators",
+         year      = "2017",
+         journal   = "Electronic Journal of Statistics",
+         publisher = "The Institute of Mathematical Statistics and the Bernoulli Society",
+         volume    = "11",
+	 number    = "2",
+	 pages     = "3703-3737",
+	 issn      = "1935-7524",
+         doi       = "10.1214/17-EJS1330",
+         author    = c(person(given  = "David",
+                              family = "Gerard",
+                              email  = "gerard.1787@gmail.com"),
+                       person(given  = "Peter",
+                              family = "Hoff",
+                              email  = "peter.hoff@duke.edu")
+                      )
+)
