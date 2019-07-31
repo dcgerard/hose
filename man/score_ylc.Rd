@@ -10,7 +10,7 @@ score_ylc(Y, rho = 0.01, sampmin = min(c(dim(Y), 5)),
 \arguments{
 \item{Y}{An array of numerics.}
 
-\item{rho}{The proportion of the core array to use to calcuate the
+\item{rho}{The proportion of the core array to use to calculate the
 mode-specific modified singular values.}
 
 \item{sampmin}{The minimum number of columns to of the core to use
@@ -26,7 +26,7 @@ Implements the "Sparse CORE" method from Yokota, Lee, and Cichocki (2017).
 The idea is that one uses only a subset of the core array from the HOSVD
 to calculate the "modified" singular values. Then one uses the minimum
 description length (see \code{\link{mdl_eigen}}) criteria to choose the rank
-of the array. The porportion of the core should be small. We have one percent
+of the array. The proportion of the core should be small. We have one percent
 as the default as suggested in their paper, but my guess is that this should
 actually depend on the rank of the mean tensor.
 }

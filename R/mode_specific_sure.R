@@ -170,7 +170,7 @@ diverge_given_c <- function(obj, func, dfunc, lambda) {
 ##' @param func A list of length \code{length(dim(X))} of shrinkage functions.
 ##' @param dfunc A list of length \code{length(dim(X))} of corresponding
 ##'   derivative functions.
-##' @param lambda A list of parameter values for shinking along each mode.
+##' @param lambda A list of parameter values for shrinking along each mode.
 ##' @param tau2 A positive numeric. The variance. Assumed known and defaults to
 ##'   1.
 ##'
@@ -326,7 +326,7 @@ sure_rank <- function(X, max_nrank = dim(X), tau2 = 1) {
 ##' @param c_obj = Output from \code{\link{get_c}}.
 ##' @param sgd_lambda Lambda value from sgd for lambda from hose.
 ##' @param sgd_lambda_c Lambda value from sgd for c from hose.
-##' @param c_init Initalization for c from hose.
+##' @param c_init Initialization for c from hose.
 ##' @param lambda_init Initialization for lambda from hose.
 ##' @param sgd_c c value from sgd.
 ##' @param itermax Maximum number of iterations for sgd.

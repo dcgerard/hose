@@ -141,7 +141,7 @@ is low multilinear rank.</p></td>
       <td><p>A string. The variance estimation procedure to use on each
 matricization of the data tensor. Either "soft" for calling
 <code><a href='sig_soft.html'>sig_soft</a></code>, "mp" for calling <code><a href='sig_mp.html'>sig_mp</a></code>, or "naive"
-for calling <code><a href='sig_naive.html'>sig_naive</a></code>. See those functions for descriptions 
+for calling <code><a href='sig_naive.html'>sig_naive</a></code>. See those functions for descriptions
 of these procedures.</p></td>
     </tr>
     <tr>
@@ -153,7 +153,7 @@ mean tensor. Only needed if <code>sig_method == "naive"</code>.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>sig2_est</code> A positive numeric. The final variance estimate.</p>  
+    <p><code>sig2_est</code> A positive numeric. The final variance estimate.</p>
 <p><code>sig2_vec</code> A vector of positive numerics. The estimates of the
   variance when using each matricization of the data tensor. If these numbers
   are wildly different, then you should be skeptical of this variance
@@ -162,7 +162,7 @@ mean tensor. Only needed if <code>sig_method == "naive"</code>.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If a data tensor has low multilinear rank mean, then this function will use
-matrix-specific variance estimation procedues along each matricization of the
+matrix-specific variance estimation procedures along each matricization of the
 data tensor to estimate the variance. These estimates are then averaged to
 provide the final estimate of the variance.</p>
     
@@ -171,7 +171,7 @@ provide the final estimate of the variance.</p>
     <p>Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani.
   <a href='http://arxiv.org/abs/1410.8260'>"Selecting the number of principal
   components: Estimation of the true rank of a noisy matrix."</a> arXiv preprint
-  arXiv:1410.8260 (2014).</p>  
+  arXiv:1410.8260 (2014).</p>
 <p>Gavish, M., &amp; Donoho, D. L. (2014).
   <a href='http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6846297&amp;tag=1'>The
    optimal hard threshold for singular values is 4/sqrt(3)</a>. Information

@@ -11,13 +11,13 @@ sig_soft(Y, c_val = 2/3, k = 10, lambda_grid = NULL,
 \item{Y}{The data matrix.}
 
 \item{c_val}{The ad-hoc adjustment to the degrees of freedom. Choi et
-al (2014) found that 2/3 worked well in simultations.}
+al (2014) found that 2/3 worked well in simulations.}
 
-\item{k}{A positive integer. The fold for the soft-impute cross validation. 
+\item{k}{A positive integer. The fold for the soft-impute cross validation.
 Default is 10.}
 
-\item{lambda_grid}{A vector of positive numerics. The values of lambda to 
-compute. The default is 20 values from the minimum to the maximum singular 
+\item{lambda_grid}{A vector of positive numerics. The values of lambda to
+compute. The default is 20 values from the minimum to the maximum singular
 value of \code{Y}.}
 
 \item{print_update}{A logical. Should we print to the screen the status of

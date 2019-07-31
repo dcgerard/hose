@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Soft-impute Cross-validation as described in Choi et al (2014). — soft_cv" />
 
-<meta property="og:description" content="Hold out some data from a matrix and use softImpute to complete the 
+<meta property="og:description" content="Hold out some data from a matrix and use softImpute to complete the
 matrix. The tuning parameter with the smallest prediction error is selected." />
 <meta name="twitter:card" content="summary" />
 
@@ -119,7 +119,7 @@ matrix. The tuning parameter with the smallest prediction error is selected." />
 
     <div class="ref-description">
     
-    <p>Hold out some data from a matrix and use <code>softImpute</code> to complete the 
+    <p>Hold out some data from a matrix and use <code>softImpute</code> to complete the
 matrix. The tuning parameter with the smallest prediction error is selected.</p>
     
     </div>
@@ -135,13 +135,13 @@ matrix. The tuning parameter with the smallest prediction error is selected.</p>
     </tr>
     <tr>
       <th>k</th>
-      <td><p>A positive integer. The fold for the soft-impute cross validation. 
+      <td><p>A positive integer. The fold for the soft-impute cross validation.
 Default is 10.</p></td>
     </tr>
     <tr>
       <th>lambda_grid</th>
-      <td><p>A vector of positive numerics. The values of lambda to 
-compute. The default is 20 values from the minimum to the maximum singular 
+      <td><p>A vector of positive numerics. The values of lambda to
+compute. The default is 20 values from the minimum to the maximum singular
 value of <code>Y</code>.</p></td>
     </tr>
     <tr>
@@ -153,16 +153,16 @@ the cross-validation-ish procedure at each iteration (TRUE) or not (FALSE)?</p><
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>lambda_min</code> A positive numeric. The lambda that minimizes the 
-  prediction error.</p>  
-<p><code>lambda_grid</code> A vector of positive numerics. The putative lambdas.</p>  
-<p><code>pred_err_vec</code> A vector of positive numerics. The prediction errors 
+    <p><code>lambda_min</code> A positive numeric. The lambda that minimizes the
+  prediction error.</p>
+<p><code>lambda_grid</code> A vector of positive numerics. The putative lambdas.</p>
+<p><code>pred_err_vec</code> A vector of positive numerics. The prediction errors
   for the lambdas in <code>lambda_grid</code>.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani. 
-  <a href='http://arxiv.org/abs/1410.8260'>"Selecting the number of principal 
+    <p>Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani.
+  <a href='http://arxiv.org/abs/1410.8260'>"Selecting the number of principal
   components: Estimation of the true rank of a noisy matrix."</a> arXiv preprint
   arXiv:1410.8260 (2014).</p>
     

@@ -21,7 +21,7 @@ parameter.}
 \item{epsilon}{A positive numeric. The min distance of the Newton update.}
 }
 \value{
-\code{c_new} A postive numeric. The update of the scaling parameter.
+\code{c_new} A positive numeric. The update of the scaling parameter.
 }
 \description{
 Update scale parameter in scale and soft-thresholding HOSE's.

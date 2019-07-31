@@ -13,7 +13,7 @@ is low multilinear rank.}
 \item{sig_method}{A string. The variance estimation procedure to use on each
 matricization of the data tensor. Either "soft" for calling
 \code{\link{sig_soft}}, "mp" for calling \code{\link{sig_mp}}, or "naive"
-for calling \code{\link{sig_naive}}. See those functions for descriptions 
+for calling \code{\link{sig_naive}}. See those functions for descriptions
 of these procedures.}
 
 \item{r}{A vector of positive integers. The known multilinear rank of the
@@ -21,7 +21,7 @@ mean tensor. Only needed if \code{sig_method == "naive"}.}
 }
 \value{
 \code{sig2_est} A positive numeric. The final variance estimate.
-  
+
   \code{sig2_vec} A vector of positive numerics. The estimates of the
   variance when using each matricization of the data tensor. If these numbers
   are wildly different, then you should be skeptical of this variance
@@ -34,7 +34,7 @@ come up with a final variance estimate.
 }
 \details{
 If a data tensor has low multilinear rank mean, then this function will use
-matrix-specific variance estimation procedues along each matricization of the
+matrix-specific variance estimation procedures along each matricization of the
 data tensor to estimate the variance. These estimates are then averaged to
 provide the final estimate of the variance.
 }
@@ -43,7 +43,7 @@ Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani.
   \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal
   components: Estimation of the true rank of a noisy matrix."} arXiv preprint
   arXiv:1410.8260 (2014).
-  
+
   Gavish, M., & Donoho, D. L. (2014).
   \href{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6846297&tag=1}{The
    optimal hard threshold for singular values is 4/sqrt(3)}. Information

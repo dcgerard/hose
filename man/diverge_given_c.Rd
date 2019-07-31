@@ -14,7 +14,7 @@ diverge_given_c(obj, func, dfunc, lambda)
 \item{dfunc}{A list of length \code{length(dim(X))} of corresponding
 derivative functions.}
 
-\item{lambda}{A list of parameter values for shinking along each mode.}
+\item{lambda}{A list of parameter values for shrinking along each mode.}
 }
 \value{
 \code{divergence_f} The divergence of the higher-order spectral

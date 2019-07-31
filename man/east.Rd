@@ -3,7 +3,7 @@
 \docType{data}
 \name{east}
 \alias{east}
-\title{Round-robbin game statistics from the Eastern NBA conference during the 2014-2015 season.}
+\title{Round-robin game statistics from the Eastern NBA conference during the 2014-2015 season.}
 \format{A list of tensors with the following elements:
 \describe{
   \item{east_array}{A four-dimensional tensor. Element (i, j, k, l) contains

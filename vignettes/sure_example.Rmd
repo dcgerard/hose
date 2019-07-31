@@ -63,7 +63,7 @@ sig_soft_out <- tensor_var_est(X, sig_method = "soft")
 print(sig_soft_out$sig2_est)
 ```
 
-A method that works very well when the multilinear rank is very small and works very poorly othwerwise is that of Gavish and Donoho (2014). Their estimator is based on an asymptotic framework where the rank of the mean and the signal to noise ratio remain constant while the size of the matrix increases. Since 2 (the rank) is much less than 10 (the dimension size), this procedure might work here. Use the option `sig_method = "mp"` in `tensor_var_est` to implement this method.
+A method that works very well when the multilinear rank is very small and works very poorly otherwise is that of Gavish and Donoho (2014). Their estimator is based on an asymptotic framework where the rank of the mean and the signal to noise ratio remain constant while the size of the matrix increases. Since 2 (the rank) is much less than 10 (the dimension size), this procedure might work here. Use the option `sig_method = "mp"` in `tensor_var_est` to implement this method.
 ```{r}
 sig_mp_out <- tensor_var_est(X, sig_method = "mp")
 print(sig_mp_out$sig2_est)

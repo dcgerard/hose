@@ -1,4 +1,4 @@
-#' Round-robbin game statistics from the Eastern NBA conference during the 2014-2015 season.
+#' Round-robin game statistics from the Eastern NBA conference during the 2014-2015 season.
 #'
 #' A dataset of tensors containing pair-wise statistics between teams in the first half
 #' and second half of the 2014-2015 season. This dataset only contains statistics for
@@ -39,7 +39,7 @@
 "east"
 
 
-#' Round-robbin game statistics from the Western NBA conference during the 2014-2015 season.
+#' Round-robin game statistics from the Western NBA conference during the 2014-2015 season.
 #'
 #' A dataset of tensors containing pair-wise statistics between teams in the first half
 #' and second half of the 2014-2015 season. This dataset only contains statistics for

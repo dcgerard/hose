@@ -34,7 +34,7 @@ df_truncate <- function(x, r) {
 ##' Soft thresholding shrinkage function. Same as lasso for spectral shrinkage.
 ##'
 ##' @param x A vector of numerics.
-##' @param lambda A numeric. The threshholding parameter.
+##' @param lambda A numeric. The thresholding parameter.
 ##'
 ##' @seealso \code{\link{df_lasso}}.
 ##'
@@ -64,7 +64,7 @@ df_lasso <- function(x, lambda) {
 ##'
 ##' @param x A vector of numerics.
 ##' @param params A vector of length 2 of numerics. \code{param[1]} is the
-##'   scaling parameter, \code{param[2]} is the threshholding parameter.
+##'   scaling parameter, \code{param[2]} is the thresholding parameter.
 ##'
 ##' @seealso \code{\link{df_lasso_mult}}.
 ##'
@@ -98,7 +98,7 @@ df_lasso_mult <- function(x, params) {
 ##' Soft thresholding a core array.
 ##'
 ##' @param S An array of numerics.
-##' @param lambda A numeric. The threshholding parameter.
+##' @param lambda A numeric. The thresholding parameter.
 ##'
 ##' @seealso \code{\link{df_S_lasso}}.
 ##'
@@ -131,7 +131,7 @@ df_S_lasso <- function(S, lambda) {
 ##'
 ##' @param S An array of numerics.
 ##' @param params A vector of length 2 of numerics. \code{param[1]} is the
-##'   scaling parameter, \code{param[2]} is the threshholding parameter.
+##'   scaling parameter, \code{param[2]} is the thresholding parameter.
 ##'
 ##' @seealso \code{\link{df_S_lasso_mult}}.
 ##'

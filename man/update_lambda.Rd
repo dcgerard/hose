@@ -23,7 +23,7 @@ parameter.}
 \item{epsilon}{A positive numeric. The min distance of the Newton update.}
 }
 \value{
-\code{lambda_new} A numeric. The update of the threshholding
+\code{lambda_new} A numeric. The update of the thresholding
   parameter.
 }
 \description{

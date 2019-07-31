@@ -14,7 +14,7 @@ sure_given_c(obj, func, dfunc, lambda, tau2 = 1)
 \item{dfunc}{A list of length \code{length(dim(X))} of corresponding
 derivative functions.}
 
-\item{lambda}{A list of parameter values for shinking along each mode.}
+\item{lambda}{A list of parameter values for shrinking along each mode.}
 
 \item{tau2}{A positive numeric. The variance. Assumed known and defaults to
 1.}

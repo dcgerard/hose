@@ -10,7 +10,7 @@
 ##'   1.
 ##' @param epsilon A positive numeric. The min distance of the Newton update.
 ##'
-##' @return \code{lambda_new} A numeric. The update of the threshholding
+##' @return \code{lambda_new} A numeric. The update of the thresholding
 ##'   parameter.
 ##'
 ##' @seealso \code{\link{soft_coord}}.
@@ -108,23 +108,23 @@ update_lambda_brent <- function(c_obj, lambda_current, c_current, k, tau2) {
     sig <- hosvd_x$D
 
     oout <- stats::optim(par = lambda_current[k], fn = sure_given_c_one_mode, method = "Brent",
-                         lower = 0, upper = max(sig[[k]]), c_obj = c_obj, 
+                         lower = 0, upper = max(sig[[k]]), c_obj = c_obj,
                          lambda_current = lambda_current, c_current = c_current,
-                         current_mode = k, tau2 = tau2)      
-    
+                         current_mode = k, tau2 = tau2)
+
      return(list(lambda_new = oout$par, sure = oout$value))
 }
 
 #' Wrapper for \code{\link{sure_given_c}} when only updating one mode.
-#' 
+#'
 #' @inheritParams update_lambda
 #' @param lambda A numeric scalar. The current value of the lambda you are updating.
 #' @param current_mode The current mode for which lambda is a member.
-#' 
+#'
 #' @author David Gerard
 sure_given_c_one_mode <- function(lambda, c_obj, lambda_current, c_current, current_mode, tau2) {
   n <- length(lambda_current)
-  
+
   ## set up the lasso function -----------------------------------------------
   func_lasso <- list()
   dfunc_lasso <- list()
@@ -134,9 +134,9 @@ sure_given_c_one_mode <- function(lambda, c_obj, lambda_current, c_current, curr
     func_lasso[[mode_index]] <- f_lasso
     dfunc_lasso[[mode_index]] <- df_lasso
   }
-  
+
   lambda_current[current_mode] <- lambda
-  
+
   lambda_list <- list()
   lambda_list[[1]] <- c(lambda_current[1], c_current)
   for (index in 2:n) {
@@ -161,7 +161,7 @@ sure_given_c_one_mode <- function(lambda, c_obj, lambda_current, c_current, curr
 ##' @param tau2 A positive numeric. The variance. Assumed known and defaults to
 ##'   1.
 ##'
-##' @return \code{c_new} A postive numeric. The update of the scaling parameter.
+##' @return \code{c_new} A positive numeric. The update of the scaling parameter.
 ##'
 ##' @seealso \code{\link{soft_coord}}.
 ##'

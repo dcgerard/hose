@@ -2,7 +2,7 @@
 % Please edit documentation in R/cichocki_meet.R
 \name{meet}
 \alias{meet}
-\title{Implements the Modified eivgenvalues estimator for Tucker rank determination (MEET) algorithm
+\title{Implements the Modified eigenvalues estimator for Tucker rank determination (MEET) algorithm
 from Yokota, Lee, and Cichocki (2017).}
 \usage{
 meet(Y, tau2 = NULL)

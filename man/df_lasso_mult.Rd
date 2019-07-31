@@ -10,7 +10,7 @@ df_lasso_mult(x, params)
 \item{x}{A vector of numerics.}
 
 \item{params}{A vector of length 2 of numerics. \code{param[1]} is the
-scaling parameter, \code{param[2]} is the threshholding parameter.}
+scaling parameter, \code{param[2]} is the thresholding parameter.}
 }
 \description{
 Derivative of scaling and soft thresholding shrinkage function.

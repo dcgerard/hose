@@ -9,32 +9,32 @@ soft_cv(Y, k = 10, lambda_grid = NULL, print_update = FALSE)
 \arguments{
 \item{Y}{The data matrix.}
 
-\item{k}{A positive integer. The fold for the soft-impute cross validation. 
+\item{k}{A positive integer. The fold for the soft-impute cross validation.
 Default is 10.}
 
-\item{lambda_grid}{A vector of positive numerics. The values of lambda to 
-compute. The default is 20 values from the minimum to the maximum singular 
+\item{lambda_grid}{A vector of positive numerics. The values of lambda to
+compute. The default is 20 values from the minimum to the maximum singular
 value of \code{Y}.}
 
 \item{print_update}{A logical. Should we print to the screen the status of
 the cross-validation-ish procedure at each iteration (TRUE) or not (FALSE)?}
 }
 \value{
-\code{lambda_min} A positive numeric. The lambda that minimizes the 
+\code{lambda_min} A positive numeric. The lambda that minimizes the
   prediction error.
-  
+
   \code{lambda_grid} A vector of positive numerics. The putative lambdas.
-  
-  \code{pred_err_vec} A vector of positive numerics. The prediction errors 
+
+  \code{pred_err_vec} A vector of positive numerics. The prediction errors
   for the lambdas in \code{lambda_grid}.
 }
 \description{
-Hold out some data from a matrix and use \code{softImpute} to complete the 
+Hold out some data from a matrix and use \code{softImpute} to complete the
 matrix. The tuning parameter with the smallest prediction error is selected.
 }
 \references{
-Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani. 
-  \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal 
+Choi, Yunjin, Jonathan Taylor, and Robert Tibshirani.
+  \href{http://arxiv.org/abs/1410.8260}{"Selecting the number of principal
   components: Estimation of the true rank of a noisy matrix."} arXiv preprint
   arXiv:1410.8260 (2014).
 }

@@ -17,7 +17,7 @@ sgd_given_c(c_obj, sgd_lambda, sgd_lambda_c, c_init = 1,
 
 \item{sgd_lambda_c}{Lambda value from sgd for c from hose.}
 
-\item{c_init}{Initalization for c from hose.}
+\item{c_init}{Initialization for c from hose.}
 
 \item{lambda_init}{Initialization for lambda from hose.}
 

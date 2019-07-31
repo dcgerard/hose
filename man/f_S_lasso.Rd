@@ -9,7 +9,7 @@ f_S_lasso(S, lambda)
 \arguments{
 \item{S}{An array of numerics.}
 
-\item{lambda}{A numeric. The threshholding parameter.}
+\item{lambda}{A numeric. The thresholding parameter.}
 }
 \description{
 Soft thresholding a core array.

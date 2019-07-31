@@ -1,4 +1,4 @@
-##' Higher-order SVD using same signed eigenvectors as matix SVD's.
+##' Higher-order SVD using same signed eigenvectors as matrix SVD's.
 ##'
 ##' Calculates the left singular vectors of each matrix unfolding of an array,
 ##' then calculates the core array. The resulting output is a Tucker

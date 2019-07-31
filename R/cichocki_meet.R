@@ -1,7 +1,7 @@
 ## Functions to implement MEET from Yokota, Lee, and Cichocki (2017) for comparisons.
 ## https://doi.org/10.1109/TSP.2016.2620965
 
-#' Implements the Modified eivgenvalues estimator for Tucker rank determination (MEET) algorithm
+#' Implements the Modified eigenvalues estimator for Tucker rank determination (MEET) algorithm
 #' from Yokota, Lee, and Cichocki (2017).
 #'
 #' The model is \deqn{Y = A + E,} where A is a low-rank matrix and E is
@@ -70,12 +70,12 @@ meet <- function(Y, tau2 = NULL) {
 #' The idea is that one uses only a subset of the core array from the HOSVD
 #' to calculate the "modified" singular values. Then one uses the minimum
 #' description length (see \code{\link{mdl_eigen}}) criteria to choose the rank
-#' of the array. The porportion of the core should be small. We have one percent
+#' of the array. The proportion of the core should be small. We have one percent
 #' as the default as suggested in their paper, but my guess is that this should
 #' actually depend on the rank of the mean tensor.
 #'
 #' @param Y An array of numerics.
-#' @param rho The proportion of the core array to use to calcuate the
+#' @param rho The proportion of the core array to use to calculate the
 #'     mode-specific modified singular values.
 #' @param sampmin The minimum number of columns to of the core to use
 #'     in calculating the mode-specific modified singular values.

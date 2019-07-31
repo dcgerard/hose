@@ -2,7 +2,7 @@
 % Please edit documentation in R/misc.R
 \name{hosvd_full}
 \alias{hosvd_full}
-\title{Higher-order SVD using same signed eigenvectors as matix SVD's.}
+\title{Higher-order SVD using same signed eigenvectors as matrix SVD's.}
 \usage{
 hosvd_full(Y)
 }

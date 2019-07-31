@@ -9,7 +9,7 @@ f_lasso(x, lambda)
 \arguments{
 \item{x}{A vector of numerics.}
 
-\item{lambda}{A numeric. The threshholding parameter.}
+\item{lambda}{A numeric. The thresholding parameter.}
 }
 \description{
 Soft thresholding shrinkage function. Same as lasso for spectral shrinkage.
